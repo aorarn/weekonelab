@@ -1,0 +1,68 @@
+/*
+ * Dialog styles, one class per slot (matches each element's `data-slot`).
+ * Markup lives in Dialog.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  /* ---------- Overlay ---------- */
+  .overlay {
+    @apply fixed inset-0 isolate z-50 bg-black/80 duration-100 supports-backdrop-filter:backdrop-blur-xs;
+    @apply data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0;
+  }
+
+  /* ---------- Content ---------- */
+  .content {
+    @apply fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-xs/relaxed text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none;
+    @apply data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95;
+  }
+
+  /* Content sizes: max width from the `sm` breakpoint up */
+  .size-sm {
+    @apply sm:max-w-sm;
+  }
+
+  .size-md {
+    @apply sm:max-w-md;
+  }
+
+  .size-lg {
+    @apply sm:max-w-lg;
+  }
+
+  .size-xl {
+    @apply sm:max-w-2xl;
+  }
+
+  /* ---------- Close (×) button ---------- */
+  .close {
+    @apply absolute top-2 right-2;
+  }
+
+  .closeLabel {
+    @apply sr-only;
+  }
+
+  /* ---------- Header / footer ---------- */
+  .header {
+    @apply flex flex-col gap-1;
+  }
+
+  .footer {
+    @apply flex flex-col-reverse gap-2 sm:flex-row sm:justify-end;
+  }
+
+  /* ---------- Text ---------- */
+  .title {
+    @apply font-heading text-sm font-medium;
+  }
+
+  .description {
+    @apply text-xs/relaxed text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground;
+  }
+}
