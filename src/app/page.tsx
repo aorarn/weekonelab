@@ -2,12 +2,16 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import {
   Add01Icon,
   ArrowRight01Icon,
+  Copy01Icon,
   Delete02Icon,
   Download04Icon,
   Loading03Icon,
   Mail01Icon,
   MoreHorizontalIcon,
+  Search01Icon,
+  SentIcon,
   Settings02Icon,
+  ViewIcon,
 } from "@hugeicons/core-free-icons";
 
 import { Button } from "@/components/ui/Button";
@@ -30,6 +34,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/Dialog";
+import { Input } from "@/components/ui/Input";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from "@/components/ui/InputGroup";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/InputOTP";
+import { Textarea } from "@/components/ui/Textarea";
 
 const buttonVariants = [
   "default",
@@ -49,6 +69,14 @@ const components = [
   { id: "button", name: "Button", description: "Actions and form submission" },
   { id: "card", name: "Card", description: "Grouped content container" },
   { id: "dialog", name: "Dialog", description: "Modal overlay window" },
+  { id: "input", name: "Input", description: "Single-line text field" },
+  { id: "textarea", name: "Textarea", description: "Multi-line text field" },
+  {
+    id: "input-group",
+    name: "InputGroup",
+    description: "Input with addons, text and buttons",
+  },
+  { id: "input-otp", name: "InputOTP", description: "One-time passcode entry" },
 ] as const;
 
 function ComponentSection({
@@ -345,6 +373,171 @@ export default function Home() {
                 </DialogFooter>
               </DialogContent>
             </Dialog>
+          </Example>
+        </ComponentSection>
+        {/* ───────────── Input ───────────── */}
+        <ComponentSection
+          id="input"
+          title="Input"
+          importPath="@/components/ui/Input"
+        >
+          <Example title="Types" description="Any native input type" stack>
+            <Input placeholder="Full name" />
+            <Input type="email" placeholder="name@company.com" />
+            <Input type="password" placeholder="Password" />
+            <Input type="file" />
+          </Example>
+
+          <Example
+            title="States"
+            description="disabled and aria-invalid"
+            stack
+          >
+            <Input placeholder="Disabled" disabled />
+            <Input defaultValue="not-an-email" aria-invalid />
+          </Example>
+        </ComponentSection>
+
+        {/* ───────────── Textarea ───────────── */}
+        <ComponentSection
+          id="textarea"
+          title="Textarea"
+          importPath="@/components/ui/Textarea"
+        >
+          <Example
+            title="Default"
+            description="Grows with its content (field-sizing: content)"
+            stack
+          >
+            <Textarea placeholder="Write a note…" />
+            <Textarea defaultValue="Required field" aria-invalid />
+          </Example>
+        </ComponentSection>
+
+        {/* ───────────── InputGroup ───────────── */}
+        <ComponentSection
+          id="input-group"
+          title="InputGroup"
+          importPath="@/components/ui/InputGroup"
+        >
+          <Example
+            title="Inline addons"
+            description="InputGroupAddon align: inline-start, inline-end"
+            stack
+          >
+            <InputGroup>
+              <InputGroupInput placeholder="Search accounts…" />
+              <InputGroupAddon>
+                <HugeiconsIcon icon={Search01Icon} strokeWidth={2} />
+              </InputGroupAddon>
+              <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
+            </InputGroup>
+
+            <InputGroup>
+              <InputGroupAddon>
+                <InputGroupText>https://</InputGroupText>
+              </InputGroupAddon>
+              <InputGroupInput placeholder="example.com" />
+              <InputGroupAddon align="inline-end">
+                <InputGroupText>.com</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </Example>
+
+          <Example
+            title="With buttons"
+            description="InputGroupButton size: xs, sm, icon-xs, icon-sm"
+            stack
+          >
+            <InputGroup>
+              <InputGroupInput type="password" placeholder="Password" />
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton size="icon-xs" aria-label="Show password">
+                  <HugeiconsIcon icon={ViewIcon} strokeWidth={2} />
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+
+            <InputGroup>
+              <InputGroupInput readOnly defaultValue="sk-test-1234" />
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton>
+                  <HugeiconsIcon icon={Copy01Icon} strokeWidth={2} />
+                  Copy
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+
+            <InputGroup>
+              <InputGroupInput defaultValue="invalid value" aria-invalid />
+              <InputGroupAddon align="inline-end">
+                <InputGroupText>Invalid</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </Example>
+
+          <Example
+            title="With textarea"
+            description="Block addons stack above or below the control"
+            stack
+          >
+            <InputGroup>
+              <InputGroupTextarea placeholder="Reply to customer…" />
+              <InputGroupAddon align="block-end" className="border-t">
+                <InputGroupText>0 / 500</InputGroupText>
+                <InputGroupButton
+                  size="sm"
+                  variant="default"
+                  className="ml-auto"
+                >
+                  Send
+                  <HugeiconsIcon icon={SentIcon} strokeWidth={2} data-icon="inline-end" />
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+          </Example>
+        </ComponentSection>
+
+        {/* ───────────── InputOTP ───────────── */}
+        <ComponentSection
+          id="input-otp"
+          title="InputOTP"
+          importPath="@/components/ui/InputOTP"
+        >
+          <Example
+            title="Six digits"
+            description="InputOTPGroup + InputOTPSlot, split with InputOTPSeparator"
+          >
+            <InputOTP maxLength={6}>
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+              </InputOTPGroup>
+              <InputOTPSeparator />
+              <InputOTPGroup>
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+          </Example>
+
+          <Example title="States" description="disabled and aria-invalid">
+            <InputOTP maxLength={4} disabled>
+              <InputOTPGroup>
+                {[0, 1, 2, 3].map((i) => (
+                  <InputOTPSlot key={i} index={i} />
+                ))}
+              </InputOTPGroup>
+            </InputOTP>
+            <InputOTP maxLength={4}>
+              <InputOTPGroup>
+                {[0, 1, 2, 3].map((i) => (
+                  <InputOTPSlot key={i} index={i} aria-invalid />
+                ))}
+              </InputOTPGroup>
+            </InputOTP>
           </Example>
         </ComponentSection>
       </main>
