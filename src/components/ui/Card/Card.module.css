@@ -1,0 +1,56 @@
+/*
+ * Card styles, one class per slot (matches each element's `data-slot`).
+ * Markup lives in Card.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ * Spacing is driven by the `--card-spacing` custom property set on the root.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  /* ---------- Root ---------- */
+  .root {
+    @apply flex flex-col gap-(--card-spacing) overflow-hidden rounded-lg bg-card py-(--card-spacing) text-xs/relaxed text-card-foreground ring-1 ring-foreground/10;
+    @apply has-[>img:first-child]:pt-0 *:[img:first-child]:rounded-t-lg *:[img:last-child]:rounded-b-lg;
+  }
+
+  /* Sizes: set the spacing scale used by every slot */
+  .size-default {
+    @apply [--card-spacing:--spacing(4)];
+  }
+
+  .size-sm {
+    @apply [--card-spacing:--spacing(3)];
+  }
+
+  /* ---------- Header ---------- */
+  .header {
+    @apply grid auto-rows-min items-start gap-1 rounded-t-lg px-(--card-spacing);
+    @apply has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing);
+  }
+
+  .action {
+    @apply col-start-2 row-span-2 row-start-1 self-start justify-self-end;
+  }
+
+  /* ---------- Text ---------- */
+  .title {
+    @apply font-heading text-sm font-medium;
+  }
+
+  .description {
+    @apply text-xs/relaxed text-muted-foreground;
+  }
+
+  /* ---------- Content / footer ---------- */
+  .content {
+    @apply px-(--card-spacing);
+  }
+
+  .footer {
+    @apply flex items-center rounded-b-lg px-(--card-spacing) [.border-t]:pt-(--card-spacing);
+  }
+}
