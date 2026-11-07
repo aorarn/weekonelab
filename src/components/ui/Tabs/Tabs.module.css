@@ -1,0 +1,54 @@
+/*
+ * Tabs styles, one class per slot/variant. Markup lives in Tabs.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex gap-2 data-horizontal:flex-col;
+  }
+
+  .list {
+    @apply inline-flex w-fit items-center justify-center rounded-lg p-[3px] text-muted-foreground;
+    @apply group-data-horizontal/tabs:h-8 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col;
+    @apply data-[variant=line]:rounded-none;
+  }
+
+  .list-variant-default {
+    @apply bg-muted;
+  }
+
+  .list-variant-line {
+    @apply gap-1 bg-transparent;
+  }
+
+  .trigger {
+    @apply relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border;
+    @apply border-transparent px-1.5 py-0.5 text-xs font-medium whitespace-nowrap text-foreground/60 transition-all;
+    @apply group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start;
+    @apply group-data-vertical/tabs:py-[calc(--spacing(1.25))] hover:text-foreground focus-visible:border-ring;
+    @apply focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring;
+    @apply disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1;
+    @apply has-data-[icon=inline-start]:pl-1 aria-disabled:pointer-events-none aria-disabled:opacity-50;
+    @apply dark:text-muted-foreground dark:hover:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0;
+    @apply [&_svg:not([class*='size-'])]:size-3.5 group-data-[variant=line]/tabs-list:bg-transparent;
+    @apply group-data-[variant=line]/tabs-list:data-active:bg-transparent;
+    @apply dark:group-data-[variant=line]/tabs-list:data-active:border-transparent;
+    @apply dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent data-active:bg-background;
+    @apply data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30;
+    @apply dark:data-active:text-foreground after:absolute after:bg-foreground after:opacity-0 after:transition-opacity;
+    @apply group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px];
+    @apply group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0;
+    @apply group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5;
+    @apply group-data-[variant=line]/tabs-list:data-active:after:opacity-100;
+  }
+
+  .content {
+    @apply flex-1 text-xs/relaxed outline-none;
+  }
+}

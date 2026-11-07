@@ -1,0 +1,38 @@
+/*
+ * Message styles, one class per slot/variant. Markup lives in Message.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .group {
+    @apply flex min-w-0 flex-col gap-1.5;
+  }
+
+  .root {
+    @apply relative flex w-full min-w-0 gap-1.5 text-xs/relaxed data-[align=end]:flex-row-reverse;
+  }
+
+  .avatar {
+    @apply flex w-fit min-w-8 shrink-0 items-center justify-center self-end overflow-hidden rounded-full bg-muted;
+    @apply group-has-data-[slot=message-footer]/message:-translate-y-8;
+  }
+
+  .content {
+    @apply flex w-full min-w-0 flex-col gap-2 wrap-break-word group-data-[align=end]/message:*:data-slot:self-end;
+  }
+
+  .header {
+    @apply flex max-w-full min-w-0 items-center px-2.5 text-[0.625rem] font-medium text-muted-foreground;
+    @apply group-has-data-[variant=ghost]/message:px-0;
+  }
+
+  .footer {
+    @apply flex max-w-full min-w-0 items-center px-2.5 text-[0.625rem] font-medium text-muted-foreground;
+    @apply group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end;
+  }
+}

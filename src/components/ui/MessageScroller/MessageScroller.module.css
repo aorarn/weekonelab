@@ -1,0 +1,45 @@
+/*
+ * MessageScroller styles, one class per slot/variant. Markup lives in MessageScroller.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply relative flex size-full min-h-0 flex-col overflow-hidden;
+  }
+
+  .viewport {
+    @apply size-full min-h-0 min-w-0 scroll-fade-b scrollbar-thin scrollbar-gutter-stable overflow-y-auto;
+    @apply overscroll-contain contain-content data-autoscrolling:scrollbar-thumb-transparent;
+    @apply data-autoscrolling:scrollbar-track-transparent data-pending-scroll:invisible;
+  }
+
+  .content {
+    @apply flex h-max min-h-full flex-col gap-6;
+  }
+
+  .item {
+    @apply min-w-0 shrink-0 [contain-intrinsic-size:auto_10rem] [content-visibility:auto];
+  }
+
+  .button {
+    @apply absolute inset-s-1/2 -translate-x-1/2 border-border bg-background text-foreground;
+    @apply transition-[translate,scale,opacity] duration-200 hover:bg-muted hover:text-foreground;
+    @apply data-[active=false]:pointer-events-none data-[active=false]:scale-95 data-[active=false]:opacity-0;
+    @apply data-[active=false]:duration-400 data-[active=false]:ease-[cubic-bezier(0.7,0,0.84,0)];
+    @apply data-[active=true]:translate-y-0 data-[active=true]:scale-100 data-[active=true]:opacity-100;
+    @apply data-[active=true]:ease-[cubic-bezier(0.23,1,0.32,1)] data-[direction=end]:bottom-4;
+    @apply data-[direction=end]:data-[active=false]:translate-y-full data-[direction=start]:top-4;
+    @apply data-[direction=start]:data-[active=false]:-translate-y-full rtl:translate-x-1/2;
+    @apply data-[direction=start]:[&_svg]:rotate-180;
+  }
+
+  .button-span {
+    @apply sr-only;
+  }
+}

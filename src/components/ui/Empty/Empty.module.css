@@ -1,0 +1,45 @@
+/*
+ * Empty styles, one class per slot/variant. Markup lives in Empty.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-4 rounded-xl border-dashed p-6 text-center;
+    @apply text-balance;
+  }
+
+  .header {
+    @apply flex max-w-sm flex-col items-center gap-1;
+  }
+
+  .media {
+    @apply mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0;
+  }
+
+  .media-variant-default {
+    @apply bg-transparent;
+  }
+
+  .media-variant-icon {
+    @apply flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-foreground;
+    @apply [&_svg:not([class*='size-'])]:size-4;
+  }
+
+  .title {
+    @apply font-heading text-sm font-medium tracking-tight;
+  }
+
+  .description {
+    @apply text-xs/relaxed text-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary;
+  }
+
+  .content {
+    @apply flex w-full max-w-sm min-w-0 flex-col items-center gap-2 text-xs/relaxed text-balance;
+  }
+}

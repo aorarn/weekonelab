@@ -1,0 +1,75 @@
+/*
+ * Carousel styles, one class per slot/variant. Markup lives in Carousel.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply relative;
+  }
+
+  .content {
+    @apply overflow-hidden;
+  }
+
+  .content-2 {
+    @apply flex;
+  }
+
+  .content-on {
+    @apply -ml-4;
+  }
+
+  .content-off {
+    @apply -mt-4 flex-col;
+  }
+
+  .item {
+    @apply min-w-0 shrink-0 grow-0 basis-full;
+  }
+
+  .item-on {
+    @apply pl-4;
+  }
+
+  .item-off {
+    @apply pt-4;
+  }
+
+  .previous {
+    @apply absolute touch-manipulation rounded-full;
+  }
+
+  .previous-on {
+    @apply inset-y-0 -left-12 my-auto;
+  }
+
+  .previous-off {
+    @apply -top-12 left-1/2 -translate-x-1/2 rotate-90;
+  }
+
+  .previous-span {
+    @apply sr-only;
+  }
+
+  .next {
+    @apply absolute touch-manipulation rounded-full;
+  }
+
+  .next-on {
+    @apply inset-y-0 -right-12 my-auto;
+  }
+
+  .next-off {
+    @apply -bottom-12 left-1/2 -translate-x-1/2 rotate-90;
+  }
+
+  .next-span {
+    @apply sr-only;
+  }
+}

@@ -1,0 +1,15 @@
+/*
+ * Skeleton styles, one class per slot/variant. Markup lives in Skeleton.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply animate-pulse rounded-md bg-muted;
+  }
+}

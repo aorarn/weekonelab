@@ -1,0 +1,35 @@
+/*
+ * Marker styles, one class per slot/variant. Markup lives in Marker.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply relative flex min-h-4 w-full items-center gap-2 text-left text-xs/relaxed text-muted-foreground;
+    @apply [&_svg:not([class*='size-'])]:size-3.5 [a]:underline [a]:underline-offset-3 [a]:hover:text-foreground;
+  }
+
+  .variant-separator {
+    @apply before:mr-1 before:h-px before:min-w-0 before:flex-1 before:bg-border after:ml-1 after:h-px after:min-w-0;
+    @apply after:flex-1 after:bg-border;
+  }
+
+  .variant-border {
+    @apply border-b border-border pb-2;
+  }
+
+  .icon {
+    @apply size-3.5 shrink-0 [&_svg:not([class*='size-'])]:size-3.5;
+  }
+
+  .content {
+    @apply min-w-0 wrap-break-word group-data-[variant=separator]/marker:flex-none;
+    @apply group-data-[variant=separator]/marker:text-center *:[a]:underline *:[a]:underline-offset-3;
+    @apply *:[a]:hover:text-foreground;
+  }
+}

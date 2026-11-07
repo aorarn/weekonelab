@@ -1,0 +1,30 @@
+/*
+ * ScrollArea styles, one class per slot/variant. Markup lives in ScrollArea.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply relative;
+  }
+
+  .viewport {
+    @apply size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px];
+    @apply focus-visible:ring-ring/50 focus-visible:outline-1;
+  }
+
+  .scrollbar {
+    @apply flex touch-none p-px transition-colors select-none data-horizontal:h-2.5 data-horizontal:flex-col;
+    @apply data-horizontal:border-t data-horizontal:border-t-transparent data-vertical:h-full data-vertical:w-2.5;
+    @apply data-vertical:border-l data-vertical:border-l-transparent;
+  }
+
+  .thumb {
+    @apply relative flex-1 rounded-full bg-border;
+  }
+}
