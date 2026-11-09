@@ -20,7 +20,7 @@
   }
 
   .content {
-    @apply flex h-max min-h-full flex-col gap-6;
+    @apply flex h-max min-h-full flex-col gap-8;
   }
 
   .item {

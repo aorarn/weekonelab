@@ -10,11 +10,11 @@
 
 @layer components {
   .list {
-    @apply flex flex-wrap items-center gap-1.5 text-xs/relaxed wrap-break-word text-muted-foreground;
+    @apply flex flex-wrap items-center gap-1.5 wrap-break-word text-muted-foreground text-sm sm:gap-2.5;
   }
 
   .item {
-    @apply inline-flex items-center gap-1;
+    @apply inline-flex items-center gap-1.5;
   }
 
   .link {
@@ -30,7 +30,7 @@
   }
 
   .ellipsis {
-    @apply flex size-4 items-center justify-center [&>svg]:size-3.5;
+    @apply flex items-center justify-center size-5 [&>svg]:size-4;
   }
 
   .ellipsis-span {

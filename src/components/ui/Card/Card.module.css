@@ -13,23 +13,23 @@
 @layer components {
   /* ---------- Root ---------- */
   .root {
-    @apply flex flex-col gap-(--card-spacing) overflow-hidden rounded-lg bg-card py-(--card-spacing) text-xs/relaxed text-card-foreground ring-1 ring-foreground/10;
-    @apply has-[>img:first-child]:pt-0 *:[img:first-child]:rounded-t-lg *:[img:last-child]:rounded-b-lg;
+    @apply flex flex-col gap-(--card-spacing) overflow-hidden bg-card py-(--card-spacing) text-card-foreground ring-1 ring-foreground/10;
+    @apply has-[>img:first-child]:pt-0 rounded-xl text-sm shadow-xs *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl;
   }
 
   /* Sizes: set the spacing scale used by every slot */
   .size-default {
-    @apply [--card-spacing:--spacing(4)];
+    @apply [--card-spacing:--spacing(6)];
   }
 
   .size-sm {
-    @apply [--card-spacing:--spacing(3)];
+    @apply [--card-spacing:--spacing(4)];
   }
 
   /* ---------- Header ---------- */
   .header {
-    @apply grid auto-rows-min items-start gap-1 rounded-t-lg px-(--card-spacing);
-    @apply has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing);
+    @apply grid auto-rows-min items-start gap-1 px-(--card-spacing);
+    @apply has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing) rounded-t-xl;
   }
 
   .action {
@@ -38,19 +38,19 @@
 
   /* ---------- Text ---------- */
   .title {
-    @apply font-heading text-sm font-medium;
+    @apply font-heading font-medium text-base leading-normal group-data-[size=sm]/card:text-sm;
   }
 
   .description {
-    @apply text-xs/relaxed text-muted-foreground;
+    @apply text-muted-foreground text-sm;
   }
 
   /* ---------- Content / footer ---------- */
   .content {
-    @apply px-(--card-spacing);
+    @apply flex flex-col gap-3 px-(--card-spacing);
   }
 
   .footer {
-    @apply flex items-center rounded-b-lg px-(--card-spacing) [.border-t]:pt-(--card-spacing);
+    @apply flex items-center px-(--card-spacing) [.border-t]:pt-(--card-spacing) rounded-b-xl;
   }
 }

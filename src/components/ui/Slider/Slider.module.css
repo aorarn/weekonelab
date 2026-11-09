@@ -19,8 +19,8 @@
   }
 
   .track {
-    @apply relative grow overflow-hidden rounded-md bg-muted select-none data-horizontal:h-1 data-horizontal:w-full;
-    @apply data-vertical:h-full data-vertical:w-1;
+    @apply relative grow overflow-hidden bg-muted select-none data-horizontal:w-full;
+    @apply data-vertical:h-full rounded-full data-horizontal:h-1.5 data-vertical:w-1.5;
   }
 
   .range {
@@ -28,8 +28,8 @@
   }
 
   .thumb {
-    @apply relative block size-3 shrink-0 rounded-md border border-ring bg-white ring-ring/30;
-    @apply transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-2 focus-visible:ring-2;
-    @apply focus-visible:outline-hidden active:ring-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply block shrink-0 border bg-white;
+    @apply transition-[color,box-shadow] select-none;
+    @apply focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50 size-4 rounded-full border-primary shadow-sm ring-ring/50 hover:ring-4 focus-visible:ring-4;
   }
 }

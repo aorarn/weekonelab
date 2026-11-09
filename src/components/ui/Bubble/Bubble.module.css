@@ -63,15 +63,14 @@
   }
 
   .content {
-    @apply w-fit max-w-full min-w-0 overflow-hidden rounded-lg border border-transparent px-2.5 py-1.5 text-xs/relaxed;
+    @apply w-fit max-w-full min-w-0 overflow-hidden border border-transparent;
     @apply wrap-break-word group-data-[align=end]/bubble:self-end [button]:text-left [button,a]:transition-colors;
-    @apply [button,a]:outline-none [button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-2;
-    @apply [button,a]:focus-visible:ring-ring/30;
+    @apply [button,a]:outline-none [button,a]:focus-visible:border-ring rounded-xl px-3 py-2 text-sm leading-relaxed [button,a]:focus-visible:ring-3 [button,a]:focus-visible:ring-ring/50;
   }
 
   .reactions {
     @apply absolute z-10 flex w-fit shrink-0 items-center justify-center gap-1 rounded-full bg-muted px-1.5 py-0.5;
-    @apply text-xs ring-2 ring-card has-[button]:p-0;
+    @apply ring-card has-[button]:p-0 text-sm ring-3;
   }
 
   .reactions-side-top {

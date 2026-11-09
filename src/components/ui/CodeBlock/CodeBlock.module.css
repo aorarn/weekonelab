@@ -10,9 +10,8 @@
 
 @layer components {
   .root {
-    @apply relative flex w-full min-w-0 flex-col overflow-hidden rounded-md text-sm;
-    @apply has-[>[data-slot=code-block-content]:focus-visible]:ring-2;
-    @apply has-[>[data-slot=code-block-content]:focus-visible]:ring-ring/30 data-[size=sm]:text-xs;
+    @apply relative flex w-full min-w-0 flex-col overflow-hidden text-sm;
+    @apply data-[size=sm]:text-xs rounded-lg has-[>[data-slot=code-block-content]:focus-visible]:ring-3 has-[>[data-slot=code-block-content]:focus-visible]:ring-ring/50;
   }
 
   .variant-default {
@@ -25,28 +24,26 @@
   }
 
   .header {
-    @apply flex min-w-0 shrink-0 items-center gap-2 px-3 pt-3 text-muted-foreground group-data-[size=sm]/code-block:px-2;
-    @apply group-data-[size=sm]/code-block:pt-2 group-data-[variant=destructive]/code-block:text-destructive;
-    @apply *:has-[>[data-slot=code-block-title]]:min-w-0;
+    @apply flex min-w-0 shrink-0 items-center gap-2 text-muted-foreground;
+    @apply group-data-[variant=destructive]/code-block:text-destructive;
+    @apply *:has-[>[data-slot=code-block-title]]:min-w-0 px-4 pt-4 group-data-[size=sm]/code-block:px-3 group-data-[size=sm]/code-block:pt-3;
   }
 
   .title {
-    @apply min-w-0 truncate font-sans text-xs font-medium text-foreground;
+    @apply min-w-0 truncate font-sans font-medium text-foreground;
     @apply group-data-[variant=destructive]/code-block:text-destructive [&_svg]:pointer-events-none [&_svg]:inline-block;
-    @apply [&_svg]:align-middle [&_svg:not([class*='size-'])]:size-3.5 *:[svg]:me-1.5;
+    @apply [&_svg]:align-middle *:[svg]:me-1.5 text-sm group-data-[size=sm]/code-block:text-xs [&_svg:not([class*='size-'])]:size-4 group-data-[size=sm]/code-block:[&_svg:not([class*='size-'])]:size-3.5;
   }
 
   .actions {
     @apply -my-1 ms-auto -me-1.5 flex shrink-0 items-center gap-1 [[data-slot=code-block]>&]:absolute;
-    @apply [[data-slot=code-block]>&]:end-2 [[data-slot=code-block]>&]:top-2 [[data-slot=code-block]>&]:z-10;
+    @apply [[data-slot=code-block]>&]:z-10;
     @apply [[data-slot=code-block]>&]:m-0 [[data-slot=code-block]>&]:opacity-0;
     @apply [[data-slot=code-block]>&]:transition-opacity;
     @apply [[data-slot=code-block]>&]:group-focus-within/code-block:opacity-100;
     @apply [[data-slot=code-block]>&]:group-hover/code-block:opacity-100;
-    @apply group-data-[size=sm]/code-block:[[data-slot=code-block]>&]:end-1.5;
-    @apply group-data-[size=sm]/code-block:[[data-slot=code-block]>&]:top-1.5;
     @apply [[data-slot=code-block]>&]:pointer-coarse:opacity-100 [[data-slot=code-block]>&]:*:[button]:bg-background;
-    @apply [[data-slot=code-block]>&]:*:[button]:ring-1 [[data-slot=code-block]>&]:*:[button]:ring-foreground/10;
+    @apply [[data-slot=code-block]>&]:*:[button]:ring-1 [[data-slot=code-block]>&]:*:[button]:ring-foreground/10 [[data-slot=code-block]>&]:end-3 [[data-slot=code-block]>&]:top-3 group-data-[size=sm]/code-block:[[data-slot=code-block]>&]:end-2 group-data-[size=sm]/code-block:[[data-slot=code-block]>&]:top-2;
   }
 
   .copyButton-span {
@@ -54,12 +51,11 @@
   }
 
   .content {
-    @apply min-h-0 min-w-0 scroll-fade-x scrollbar-thin overflow-auto px-3 py-3 text-start font-mono leading-relaxed;
+    @apply min-h-0 min-w-0 scroll-fade-x scrollbar-thin overflow-auto text-start font-mono leading-relaxed;
     @apply outline-none group-has-data-[slot=code-block-footer]/code-block:pb-2;
-    @apply group-has-data-[slot=code-block-header]/code-block:pt-2 group-data-[size=sm]/code-block:px-2;
-    @apply group-data-[size=sm]/code-block:py-2;
+    @apply group-has-data-[slot=code-block-header]/code-block:pt-2;
     @apply group-data-[size=sm]/code-block:group-has-data-[slot=code-block-header]/code-block:pt-1.5;
-    @apply data-wrap:scroll-fade-y data-wrap:wrap-break-word data-wrap:whitespace-pre-wrap;
+    @apply data-wrap:scroll-fade-y data-wrap:wrap-break-word data-wrap:whitespace-pre-wrap px-4 py-4 group-data-[size=sm]/code-block:px-3 group-data-[size=sm]/code-block:py-3;
   }
 
   .code {
@@ -67,12 +63,12 @@
   }
 
   .line {
-    @apply relative -mx-3 block min-h-lh px-3 group-data-[size=sm]/code-block:-mx-2 group-data-[size=sm]/code-block:px-2;
+    @apply relative block min-h-lh;
     @apply before:min-w-6 before:text-end before:text-muted-foreground after:absolute after:start-1 after:top-0;
     @apply after:text-muted-foreground after:select-none in-data-numbered:col-span-2 in-data-numbered:grid;
     @apply in-data-numbered:grid-cols-subgrid in-data-numbered:gap-x-3 in-data-numbered:[counter-increment:line];
     @apply in-data-numbered:before:content-[counter(line)] in-data-numbered:before:select-none;
-    @apply in-data-numbered:supports-[content:counter(line)_/_'']:before:content-[counter(line)_/_''];
+    @apply in-data-numbered:supports-[content:counter(line)_/_'']:before:content-[counter(line)_/_''] -mx-4 px-4 group-data-[size=sm]/code-block:-mx-3 group-data-[size=sm]/code-block:px-3;
   }
 
   .line-variant-added {
@@ -92,7 +88,6 @@
   }
 
   .footer {
-    @apply flex min-w-0 shrink-0 items-center gap-2 px-3 pb-3 text-muted-foreground group-data-[size=sm]/code-block:px-2;
-    @apply group-data-[size=sm]/code-block:pb-2;
+    @apply flex min-w-0 shrink-0 items-center gap-2 text-muted-foreground px-4 pb-4 group-data-[size=sm]/code-block:px-3 group-data-[size=sm]/code-block:pb-3;
   }
 }

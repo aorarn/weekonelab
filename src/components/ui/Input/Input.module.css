@@ -10,11 +10,11 @@
 
 @layer components {
   .root {
-    @apply h-7 w-full min-w-0 rounded-md border border-input bg-input/20 px-2 py-0.5 text-sm transition-colors outline-none md:text-xs/relaxed dark:bg-input/30;
+    @apply w-full min-w-0 rounded-md border border-input outline-none dark:bg-input/30;
     @apply placeholder:text-muted-foreground;
-    @apply file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-xs/relaxed file:font-medium file:text-foreground;
-    @apply focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30;
+    @apply file:inline-flex file:border-0 file:bg-transparent file:font-medium file:text-foreground;
+    @apply focus-visible:border-ring;
     @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
-    @apply aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40;
+    @apply aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-9 bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] file:h-7 file:text-sm focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:ring-3 md:text-sm;
   }
 }

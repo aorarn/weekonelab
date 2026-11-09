@@ -10,10 +10,10 @@
 
 @layer components {
   .root {
-    @apply pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded-xs bg-muted px-1;
-    @apply font-sans text-[0.625rem] font-medium text-muted-foreground select-none;
+    @apply pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 bg-muted px-1;
+    @apply font-sans font-medium text-muted-foreground select-none;
     @apply in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background;
-    @apply dark:in-data-[slot=tooltip-content]:bg-background/10 [&_svg:not([class*='size-'])]:size-3;
+    @apply dark:in-data-[slot=tooltip-content]:bg-background/10 [&_svg:not([class*='size-'])]:size-3 rounded-sm text-xs;
   }
 
   .group {

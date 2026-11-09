@@ -10,35 +10,35 @@
 
 @layer components {
   .root {
-    @apply flex h-9 items-center rounded-lg border p-1;
+    @apply flex h-9 items-center border p-1 gap-1 rounded-md shadow-xs;
   }
 
   .trigger {
-    @apply flex items-center rounded-[calc(var(--radius-md)-2px)] px-2 py-[calc(--spacing(0.85))] text-xs/relaxed;
-    @apply font-medium outline-hidden select-none hover:bg-muted aria-expanded:bg-muted;
+    @apply flex items-center px-2;
+    @apply font-medium outline-hidden select-none hover:bg-muted aria-expanded:bg-muted rounded-sm py-1 text-sm;
   }
 
   .content {
-    @apply min-w-32 rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100;
+    @apply bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100;
     @apply data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2;
     @apply data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2;
     @apply data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in;
-    @apply data-open:fade-in-0 data-open:zoom-in-95;
+    @apply data-open:fade-in-0 data-open:zoom-in-95 min-w-36 rounded-md;
   }
 
   .item {
-    @apply min-h-7 gap-2 rounded-md px-2 py-1 text-xs/relaxed focus:bg-accent focus:text-accent-foreground;
-    @apply not-data-[variant=destructive]:focus:**:text-accent-foreground data-inset:pl-7.5;
+    @apply gap-2 px-2 focus:bg-accent focus:text-accent-foreground;
+    @apply not-data-[variant=destructive]:focus:**:text-accent-foreground;
     @apply data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10;
     @apply data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20;
-    @apply data-disabled:opacity-50 [&_svg:not([class*='size-'])]:size-3.5;
-    @apply data-[variant=destructive]:*:[svg]:text-destructive!;
+    @apply data-disabled:opacity-50;
+    @apply data-[variant=destructive]:*:[svg]:text-destructive! rounded-sm py-1.5 text-sm data-inset:pl-8 [&_svg:not([class*='size-'])]:size-4;
   }
 
   .checkboxItem {
-    @apply relative flex min-h-7 cursor-default items-center gap-2 rounded-md py-1.5 pr-2 pl-7.5 text-xs outline-hidden;
-    @apply select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7.5;
-    @apply data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0;
+    @apply relative flex cursor-default items-center gap-2 rounded-md py-1.5 pr-2 outline-hidden;
+    @apply select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground;
+    @apply data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 pl-8 text-sm data-inset:pl-8;
   }
 
   .checkboxItem-span {
@@ -47,10 +47,9 @@
   }
 
   .radioItem {
-    @apply relative flex min-h-7 cursor-default items-center gap-2 rounded-md py-1.5 pr-2 pl-7.5 text-xs outline-hidden;
-    @apply select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7.5;
-    @apply data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0;
-    @apply [&_svg:not([class*='size-'])]:size-3.5;
+    @apply relative flex cursor-default items-center gap-2 rounded-md py-1.5 pr-2 outline-hidden;
+    @apply select-none focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground;
+    @apply data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 pl-8 text-sm data-inset:pl-8 [&_svg:not([class*='size-'])]:size-4;
   }
 
   .radioItem-span {
@@ -59,28 +58,28 @@
   }
 
   .label {
-    @apply px-2 py-1.5 text-xs text-muted-foreground data-inset:pl-7.5;
+    @apply px-2 py-1.5 text-sm font-medium data-inset:pl-8;
   }
 
   .separator {
-    @apply -mx-1 my-1 h-px bg-border/50;
+    @apply -mx-1 my-1 h-px bg-border;
   }
 
   .shortcut {
-    @apply ml-auto text-[0.625rem] tracking-widest text-muted-foreground group-focus/menubar-item:text-accent-foreground;
+    @apply ml-auto tracking-widest text-muted-foreground group-focus/menubar-item:text-accent-foreground text-xs;
   }
 
   .subTrigger {
-    @apply min-h-7 gap-2 rounded-md px-2 py-1 text-xs focus:bg-accent focus:text-accent-foreground;
-    @apply not-data-[variant=destructive]:focus:**:text-accent-foreground data-inset:pl-7.5 data-open:bg-accent;
-    @apply data-open:text-accent-foreground [&_svg:not([class*='size-'])]:size-3.5;
+    @apply gap-2 px-2 focus:bg-accent focus:text-accent-foreground;
+    @apply data-open:bg-accent;
+    @apply data-open:text-accent-foreground rounded-sm py-1.5 text-sm data-inset:pl-8 [&_svg:not([class*='size-'])]:size-4;
   }
 
   .subContent {
-    @apply min-w-32 rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100;
+    @apply min-w-32 bg-popover p-1 text-popover-foreground ring-1 ring-foreground/10 duration-100;
     @apply data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2;
     @apply data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in;
     @apply data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0;
-    @apply data-closed:zoom-out-95;
+    @apply data-closed:zoom-out-95 rounded-md shadow-lg;
   }
 }

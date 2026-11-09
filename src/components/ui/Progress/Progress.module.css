@@ -14,7 +14,7 @@
   }
 
   .track {
-    @apply relative flex h-1 w-full items-center overflow-x-hidden rounded-md bg-muted;
+    @apply relative flex w-full items-center overflow-x-hidden bg-muted h-1.5 rounded-full;
   }
 
   .indicator {
@@ -22,10 +22,10 @@
   }
 
   .label {
-    @apply text-xs/relaxed font-medium;
+    @apply font-medium text-sm;
   }
 
   .value {
-    @apply ml-auto text-xs/relaxed text-muted-foreground tabular-nums;
+    @apply ml-auto text-muted-foreground tabular-nums text-sm;
   }
 }

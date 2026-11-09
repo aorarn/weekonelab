@@ -50,7 +50,7 @@ export type DialogContentProps = DialogPrimitive.Popup.Props & {
 export function DialogContent({
   className,
   children,
-  size = "sm",
+  size = "md",
   showCloseButton = true,
   ...props
 }: DialogContentProps) {

@@ -14,7 +14,7 @@
   }
 
   .root {
-    @apply w-full caption-bottom text-xs;
+    @apply w-full caption-bottom text-sm;
   }
 
   .header {
@@ -42,6 +42,6 @@
   }
 
   .caption {
-    @apply mt-4 text-xs text-muted-foreground;
+    @apply mt-4 text-muted-foreground text-sm;
   }
 }

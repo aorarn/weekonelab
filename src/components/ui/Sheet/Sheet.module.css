@@ -10,12 +10,12 @@
 
 @layer components {
   .overlay {
-    @apply fixed inset-0 z-50 bg-black/80 transition-opacity duration-150 data-ending-style:opacity-0;
-    @apply data-starting-style:opacity-0 supports-backdrop-filter:backdrop-blur-xs;
+    @apply fixed inset-0 z-50 transition-opacity duration-150 data-ending-style:opacity-0;
+    @apply data-starting-style:opacity-0 supports-backdrop-filter:backdrop-blur-xs bg-black/10;
   }
 
   .content {
-    @apply fixed z-50 flex flex-col bg-popover bg-clip-padding text-xs/relaxed text-popover-foreground shadow-lg;
+    @apply fixed z-50 flex flex-col bg-popover bg-clip-padding text-popover-foreground shadow-lg;
     @apply transition duration-200 ease-in-out data-ending-style:opacity-0 data-starting-style:opacity-0;
     @apply data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t;
     @apply data-[side=bottom]:data-ending-style:translate-y-[2.5rem];
@@ -28,7 +28,7 @@
     @apply data-[side=right]:data-starting-style:translate-x-[2.5rem] data-[side=top]:inset-x-0 data-[side=top]:top-0;
     @apply data-[side=top]:h-auto data-[side=top]:border-b data-[side=top]:data-ending-style:translate-y-[-2.5rem];
     @apply data-[side=top]:data-starting-style:translate-y-[-2.5rem] data-[side=left]:sm:max-w-sm;
-    @apply data-[side=right]:sm:max-w-sm;
+    @apply data-[side=right]:sm:max-w-sm gap-4 text-sm;
   }
 
   .close-button {
@@ -40,18 +40,18 @@
   }
 
   .header {
-    @apply flex flex-col gap-1.5 p-6;
+    @apply flex flex-col gap-1.5 p-4;
   }
 
   .footer {
-    @apply mt-auto flex flex-col gap-2 p-6;
+    @apply mt-auto flex flex-col gap-2 p-4;
   }
 
   .title {
-    @apply font-heading text-sm font-medium text-foreground;
+    @apply font-heading font-medium text-foreground;
   }
 
   .description {
-    @apply text-xs/relaxed text-muted-foreground;
+    @apply text-muted-foreground text-sm;
   }
 }

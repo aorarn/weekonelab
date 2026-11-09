@@ -14,18 +14,16 @@
   }
 
   .root {
-    @apply h-7 w-full min-w-0 appearance-none rounded-md border border-input bg-input/20 py-0.5 pr-6 pl-2 text-xs/relaxed;
-    @apply transition-colors outline-none select-none selection:bg-primary selection:text-primary-foreground;
-    @apply placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30;
-    @apply disabled:pointer-events-none disabled:cursor-not-allowed aria-invalid:border-destructive aria-invalid:ring-2;
-    @apply aria-invalid:ring-destructive/20 data-[size=sm]:h-6 data-[size=sm]:text-[0.625rem] dark:bg-input/30;
-    @apply dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40;
+    @apply w-full min-w-0 appearance-none rounded-md border border-input;
+    @apply outline-none select-none selection:bg-primary selection:text-primary-foreground;
+    @apply placeholder:text-muted-foreground focus-visible:border-ring;
+    @apply disabled:pointer-events-none disabled:cursor-not-allowed aria-invalid:border-destructive;
+    @apply aria-invalid:ring-destructive/20 dark:bg-input/30;
+    @apply dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 h-9 bg-transparent py-1 pr-8 pl-2.5 text-sm shadow-xs transition-[color,box-shadow] focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:ring-3 data-[size=sm]:h-8;
   }
 
   .icon {
-    @apply pointer-events-none absolute top-1/2 right-1.5 size-3.5 -translate-y-1/2 text-muted-foreground select-none;
-    @apply group-data-[size=sm]/native-select:size-3;
-    @apply group-data-[size=sm]/native-select:-translate-y-[calc(--spacing(1.25))];
+    @apply pointer-events-none absolute top-1/2 -translate-y-1/2 text-muted-foreground select-none right-2.5 size-4;
   }
 
   .option {

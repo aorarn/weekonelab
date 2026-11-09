@@ -10,11 +10,11 @@
 
 @layer components {
   .group {
-    @apply flex min-w-0 flex-col gap-1.5;
+    @apply flex min-w-0 flex-col gap-2;
   }
 
   .root {
-    @apply relative flex w-full min-w-0 gap-1.5 text-xs/relaxed data-[align=end]:flex-row-reverse;
+    @apply relative flex w-full min-w-0 data-[align=end]:flex-row-reverse gap-2 text-sm;
   }
 
   .avatar {
@@ -23,16 +23,16 @@
   }
 
   .content {
-    @apply flex w-full min-w-0 flex-col gap-2 wrap-break-word group-data-[align=end]/message:*:data-slot:self-end;
+    @apply flex w-full min-w-0 flex-col wrap-break-word group-data-[align=end]/message:*:data-slot:self-end gap-2.5;
   }
 
   .header {
-    @apply flex max-w-full min-w-0 items-center px-2.5 text-[0.625rem] font-medium text-muted-foreground;
-    @apply group-has-data-[variant=ghost]/message:px-0;
+    @apply flex max-w-full min-w-0 items-center font-medium text-muted-foreground;
+    @apply group-has-data-[variant=ghost]/message:px-0 px-3 text-xs;
   }
 
   .footer {
-    @apply flex max-w-full min-w-0 items-center px-2.5 text-[0.625rem] font-medium text-muted-foreground;
-    @apply group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end;
+    @apply flex max-w-full min-w-0 items-center font-medium text-muted-foreground;
+    @apply group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end px-3 text-xs;
   }
 }

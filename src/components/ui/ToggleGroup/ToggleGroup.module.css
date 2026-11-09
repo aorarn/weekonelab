@@ -11,7 +11,7 @@
 @layer components {
   .root {
     @apply flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-md;
-    @apply data-[size=sm]:rounded-[min(var(--radius-md),8px)] data-vertical:flex-col data-vertical:items-stretch;
+    @apply data-vertical:flex-col data-vertical:items-stretch data-[spacing=0]:data-[variant=outline]:shadow-xs;
   }
 
   .item {
@@ -25,6 +25,6 @@
     @apply group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0;
     @apply group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0;
     @apply group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l;
-    @apply group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t;
+    @apply group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t group-data-[spacing=0]/toggle-group:shadow-none data-[state=on]:bg-muted;
   }
 }

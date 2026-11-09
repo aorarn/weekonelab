@@ -28,7 +28,7 @@ There is no test runner configured.
 
 - **Next.js 16 App Router** under `src/app/`, with `cacheComponents: true` and `partialPrefetching: true` in `next.config.ts`. Read `node_modules/next/dist/docs/01-app/` before using routing, caching, or data APIs — e.g. `02-guides/authentication-with-cache-components.md` is relevant for the auth screens. Typed route helpers like `LayoutProps<"/">` are global.
 - **React 19**, TypeScript strict, path alias `@/*` → `src/*`.
-- **shadcn/ui style `base-mira`** (see `components.json`): components are built on **Base UI (`@base-ui/react`)**, not Radix. Props/composition follow Base UI (e.g. `ButtonPrimitive.Props`, `render` prop instead of Radix `asChild`) — check the primitive's API rather than assuming Radix patterns.
+- **shadcn/ui style `base-vega`** (see `components.json`): components are built on **Base UI (`@base-ui/react`)**, not Radix. Props/composition follow Base UI (e.g. `ButtonPrimitive.Props`, `render` prop instead of Radix `asChild`) — check the primitive's API rather than assuming Radix patterns.
 - **Icons: Hugeicons** — `<HugeiconsIcon icon={XxxIcon} strokeWidth={2} />` from `@hugeicons/react` + `@hugeicons/core-free-icons`. Don't add lucide-react. Inside buttons, mark icons with `data-icon="inline-start" | "inline-end"` so padding adjusts.
 - **Tailwind CSS v4**, CSS-first config — there is no `tailwind.config.*`. Tailwind is wired through `@tailwindcss/turbopack` in `next.config.ts`.
 - `cn()` in `src/lib/utils.ts` re-exports the `cn` package (shadcn's drop-in for clsx + tailwind-merge).

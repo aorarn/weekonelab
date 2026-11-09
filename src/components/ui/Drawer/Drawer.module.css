@@ -10,12 +10,12 @@
 
 @layer components {
   .overlay {
-    @apply fixed inset-0 z-50 min-h-dvh bg-black/80;
+    @apply fixed inset-0 z-50 min-h-dvh;
     @apply opacity-[max(var(--drawer-overlay-min-opacity,0),calc(1-var(--drawer-swipe-progress)))] transition-opacity;
     @apply duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] select-none data-ending-style:pointer-events-none;
     @apply data-ending-style:opacity-0 data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)];
     @apply data-snap-points:[--drawer-overlay-min-opacity:0.5] data-starting-style:opacity-0 data-swiping:duration-0;
-    @apply supports-backdrop-filter:backdrop-blur-xs supports-[-webkit-touch-callout:none]:absolute;
+    @apply supports-backdrop-filter:backdrop-blur-xs supports-[-webkit-touch-callout:none]:absolute bg-black/10;
   }
 
   .swipeHandle {
@@ -30,9 +30,8 @@
     @apply group-data-[swipe-direction=right]/drawer-popup:justify-end;
     @apply group-data-[swipe-direction=up]/drawer-popup:order-last;
     @apply group-data-[swipe-direction=up]/drawer-popup:items-start after:block after:shrink-0 after:rounded-full;
-    @apply after:bg-muted group-data-[swipe-axis=x]/drawer-popup:after:h-12;
-    @apply group-data-[swipe-axis=x]/drawer-popup:after:w-1 group-data-[swipe-axis=y]/drawer-popup:after:h-1;
-    @apply group-data-[swipe-axis=y]/drawer-popup:after:w-12 active:cursor-grabbing;
+    @apply after:bg-muted;
+    @apply active:cursor-grabbing group-data-[swipe-axis=x]/drawer-popup:after:h-[100px] group-data-[swipe-axis=x]/drawer-popup:after:w-1.5 group-data-[swipe-axis=y]/drawer-popup:after:h-1.5 group-data-[swipe-axis=y]/drawer-popup:after:w-[100px];
   }
 
   .viewport {
@@ -43,10 +42,10 @@
     @apply pointer-events-auto fixed z-50 m-(--drawer-inset,0px) flex h-(--drawer-content-height);
     @apply max-h-(--drawer-content-max-height,none) min-h-0 w-(--drawer-content-width,auto);
     @apply transform-[translate3d(var(--translate-x,0px),var(--translate-y,0px),0)_scale(var(--stack-scale))] flex-col;
-    @apply rounded-xl border border-popover bg-popover text-xs/relaxed text-popover-foreground;
+    @apply bg-popover text-popover-foreground;
     @apply transition-[transform,height,opacity,filter] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)];
-    @apply will-change-transform outline-none select-none [--drawer-bleed-background:transparent];
-    @apply [--drawer-inset:--spacing(2)] [interpolate-size:allow-keywords] dark:border-border;
+    @apply will-change-transform outline-none select-none;
+    @apply [interpolate-size:allow-keywords];
     @apply data-nested-drawer-open:overflow-hidden data-nested-drawer-open:brightness-95 after:pointer-events-none;
     @apply after:absolute after:bg-(--drawer-bleed-background,var(--color-popover)) data-[swipe-axis=x]:after:inset-y-0;
     @apply data-[swipe-axis=x]:after:w-(--bleed) data-[swipe-axis=y]:after:inset-x-0;
@@ -81,7 +80,7 @@
     @apply data-[swipe-direction=left]:[--translate-x:calc(var(--drawer-swipe-movement-x)+var(--stack-peek-offset)+(var(--stack-shrink)*100%))];
     @apply data-[swipe-direction=right]:right-0 data-[swipe-direction=right]:origin-right;
     @apply data-[swipe-direction=right]:[--closed-transform:translate3d(calc(100%+var(--drawer-inset,0px)+2px),0,0)];
-    @apply data-[swipe-direction=right]:[--translate-x:calc(var(--drawer-swipe-movement-x)-var(--stack-peek-offset)-(var(--stack-shrink)*100%))];
+    @apply data-[swipe-direction=right]:[--translate-x:calc(var(--drawer-swipe-movement-x)-var(--stack-peek-offset)-(var(--stack-shrink)*100%))] text-sm data-[swipe-direction=down]:rounded-t-xl data-[swipe-direction=down]:border-t data-[swipe-direction=left]:rounded-r-xl data-[swipe-direction=left]:border-r data-[swipe-direction=right]:rounded-l-xl data-[swipe-direction=right]:border-l data-[swipe-direction=up]:rounded-b-xl data-[swipe-direction=up]:border-b;
   }
 
   .content {
@@ -92,7 +91,7 @@
   }
 
   .header {
-    @apply flex shrink-0 flex-col gap-1 p-4 pb-0 group-data-[swipe-axis=y]/drawer-popup:text-center md:text-left;
+    @apply flex shrink-0 flex-col p-4 pb-0 group-data-[swipe-axis=y]/drawer-popup:text-center md:text-left gap-0.5 md:gap-1.5;
   }
 
   .footer {
@@ -100,10 +99,10 @@
   }
 
   .title {
-    @apply font-heading text-sm font-medium text-foreground;
+    @apply font-heading font-medium text-foreground;
   }
 
   .description {
-    @apply text-xs/relaxed text-balance text-muted-foreground;
+    @apply text-balance text-muted-foreground text-sm;
   }
 }

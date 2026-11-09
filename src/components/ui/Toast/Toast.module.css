@@ -16,7 +16,7 @@
 
   .root {
     @apply pointer-events-auto absolute right-0 bottom-0 z-[calc(1000-var(--toast-index))] w-full origin-bottom;
-    @apply rounded-md border bg-popover text-popover-foreground shadow-lg will-change-transform outline-none select-none;
+    @apply border bg-popover text-popover-foreground shadow-lg will-change-transform outline-none select-none;
     @apply focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 [--gap:0.75rem];
     @apply [--height:var(--toast-frontmost-height,var(--toast-height))];
     @apply [--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))];
@@ -36,7 +36,7 @@
     @apply data-expanded:data-ending-style:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))];
     @apply data-expanded:data-ending-style:data-[swipe-direction=left]:[transform:translateX(calc(var(--toast-swipe-movement-x)-150%))_translateY(var(--offset-y))];
     @apply data-expanded:data-ending-style:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x)+150%))_translateY(var(--offset-y))];
-    @apply data-expanded:data-ending-style:data-[swipe-direction=up]:[transform:translateY(calc(var(--toast-swipe-movement-y)-150%))];
+    @apply data-expanded:data-ending-style:data-[swipe-direction=up]:[transform:translateY(calc(var(--toast-swipe-movement-y)-150%))] rounded-2xl;
   }
 
   .content {

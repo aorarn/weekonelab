@@ -10,36 +10,36 @@
 
 @layer components {
   .root {
-    @apply flex w-full min-w-0 flex-col gap-4;
+    @apply flex w-full min-w-0 flex-col gap-6;
   }
 
   .progress {
-    @apply min-h-[1lh] w-fit min-w-[14ch] text-[0.625rem] font-medium text-muted-foreground tabular-nums;
+    @apply min-h-[1lh] w-fit min-w-[14ch] font-medium text-muted-foreground tabular-nums text-xs;
   }
 
   .item {
-    @apply flex min-w-0 flex-col gap-3 border-0 p-0 outline-none;
+    @apply flex min-w-0 flex-col border-0 p-0 outline-none gap-5;
   }
 
   .title {
-    @apply font-heading text-sm font-semibold text-pretty [&:not(:has(~[data-slot=questionnaire-description]))]:mb-3;
+    @apply font-heading font-semibold text-pretty text-base [&:not(:has(~[data-slot=questionnaire-description]))]:mb-5;
   }
 
   .description {
-    @apply text-xs/relaxed text-pretty text-muted-foreground;
+    @apply text-pretty text-muted-foreground text-sm;
   }
 
   .choices {
-    @apply grid min-w-0 gap-1.5;
+    @apply grid min-w-0 gap-3;
   }
 
   .choice {
-    @apply relative flex min-h-11 cursor-pointer items-start gap-2.5 rounded-xl border border-input px-3 py-2.5;
-    @apply text-start text-xs/relaxed transition-colors outline-none select-none hover:bg-input/40;
-    @apply has-[>input:focus-visible]:border-ring has-[>input:focus-visible]:ring-2;
-    @apply has-[>input:focus-visible]:ring-ring/30 data-invalid:border-destructive data-checked:border-primary/40;
-    @apply data-checked:bg-primary/10 data-disabled:pointer-events-none data-disabled:cursor-not-allowed;
-    @apply data-disabled:opacity-50;
+    @apply relative flex min-h-11 cursor-pointer items-start border border-input;
+    @apply text-start transition-colors outline-none select-none;
+    @apply has-[>input:focus-visible]:border-ring;
+    @apply data-invalid:border-destructive data-checked:border-primary/40;
+    @apply data-disabled:pointer-events-none data-disabled:cursor-not-allowed;
+    @apply data-disabled:opacity-50 gap-3 rounded-md bg-transparent px-4 py-3.5 text-sm shadow-xs hover:bg-muted/50 has-[>input:focus-visible]:ring-3 has-[>input:focus-visible]:ring-ring/50 dark:bg-input/20 data-checked:bg-muted dark:data-checked:bg-muted;
   }
 
   .choiceInput {
@@ -67,15 +67,15 @@
   }
 
   .choiceLabel {
-    @apply flex min-w-0 flex-1 flex-col gap-0.5 leading-snug;
+    @apply flex min-w-0 flex-1 flex-col leading-snug gap-1;
   }
 
   .choiceShortcut {
-    @apply pointer-events-none ms-auto hidden size-4 shrink-0 translate-y-[--spacing(0.45)] items-center justify-center;
-    @apply rounded-sm border border-input bg-background/80 font-mono text-[0.5625rem] leading-none font-medium;
+    @apply pointer-events-none ms-auto hidden shrink-0 translate-y-[--spacing(0.45)] items-center justify-center;
+    @apply border border-input font-mono leading-none font-medium;
     @apply text-muted-foreground;
     @apply group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5;
-    @apply group-data-[shortcut]/questionnaire-choice:inline-flex;
+    @apply group-data-[shortcut]/questionnaire-choice:inline-flex size-5 rounded-md bg-background text-[0.625rem] shadow-xs;
   }
 
   .choiceDescription {
@@ -87,21 +87,21 @@
   }
 
   .input {
-    @apply h-7 min-h-11 w-full min-w-0 rounded-md border border-input bg-input/20 px-2 py-0.5 text-sm;
-    @apply transition-[color,box-shadow,background-color] outline-none focus-visible:border-ring focus-visible:ring-2;
-    @apply focus-visible:ring-ring/30 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
-    @apply aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 sm:min-h-0;
-    @apply md:text-xs/relaxed dark:bg-input/30 dark:aria-invalid:border-destructive/50;
+    @apply min-h-11 w-full min-w-0 rounded-md border border-input;
+    @apply transition-[color,box-shadow,background-color] outline-none focus-visible:border-ring;
+    @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
+    @apply aria-invalid:border-destructive aria-invalid:ring-destructive/20 sm:min-h-0;
+    @apply dark:bg-input/30 dark:aria-invalid:border-destructive/50;
     @apply dark:aria-invalid:ring-destructive/40 selection:bg-primary selection:text-primary-foreground;
-    @apply placeholder:text-muted-foreground;
+    @apply placeholder:text-muted-foreground h-9 bg-transparent px-2.5 py-1 text-base shadow-xs focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:ring-3 md:text-sm;
   }
 
   .error {
-    @apply mt-2 text-xs/relaxed text-destructive;
+    @apply text-destructive text-sm;
   }
 
   .actions {
-    @apply grid min-h-11 w-full grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-1.5 sm:min-h-7;
+    @apply grid min-h-11 w-full grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 sm:min-h-9;
   }
 
   .previous {
