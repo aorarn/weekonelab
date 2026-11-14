@@ -1,0 +1,85 @@
+/*
+ * Select styles, one class per slot/variant. Markup lives in Select.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .group {
+    @apply scroll-my-1 p-1;
+  }
+
+  .value {
+    @apply flex flex-1 text-left;
+  }
+
+  .trigger {
+    @apply flex w-fit items-center justify-between gap-1.5 rounded-md border border-input;
+    @apply whitespace-nowrap outline-none focus-visible:border-ring;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+    @apply aria-invalid:border-destructive aria-invalid:ring-destructive/20;
+    @apply data-placeholder:text-muted-foreground;
+    @apply *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex;
+    @apply *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-input/30;
+    @apply dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40;
+    @apply [&_svg]:pointer-events-none [&_svg]:shrink-0 bg-transparent py-2 pr-2 pl-2.5 text-sm shadow-xs transition-[color,box-shadow] focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:ring-3 data-[size=default]:h-9 data-[size=sm]:h-8 [&_svg:not([class*='size-'])]:size-4;
+  }
+
+  .trigger-hugeiconsIcon {
+    @apply pointer-events-none text-muted-foreground size-4;
+  }
+
+  .content-positioner {
+    @apply isolate z-50;
+  }
+
+  .content {
+    @apply relative isolate z-50 max-h-(--available-height) w-(--anchor-width) origin-(--transform-origin);
+    @apply overflow-x-hidden overflow-y-auto bg-popover text-popover-foreground shadow-md ring-1;
+    @apply ring-foreground/10 duration-100 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2;
+    @apply data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2;
+    @apply data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2;
+    @apply data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95;
+    @apply data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 min-w-36 rounded-md;
+  }
+
+  .label {
+    @apply px-2 py-1.5 text-xs text-muted-foreground;
+  }
+
+  .item {
+    @apply relative flex w-full cursor-default items-center gap-2;
+    @apply outline-hidden select-none focus:bg-accent focus:text-accent-foreground;
+    @apply not-data-[variant=destructive]:focus:**:text-accent-foreground data-disabled:pointer-events-none;
+    @apply data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0;
+    @apply *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm [&_svg:not([class*='size-'])]:size-4;
+  }
+
+  .item-itemText {
+    @apply flex flex-1 shrink-0 gap-2 whitespace-nowrap;
+  }
+
+  .item-span {
+    @apply pointer-events-none absolute right-2 flex items-center justify-center size-4;
+  }
+
+  .item-hugeiconsIcon {
+    @apply pointer-events-none;
+  }
+
+  .separator {
+    @apply pointer-events-none -mx-1 my-1 h-px bg-border;
+  }
+
+  .scrollUpButton {
+    @apply top-0 z-10 flex w-full cursor-default items-center justify-center bg-popover py-1 [&_svg:not([class*='size-'])]:size-4;
+  }
+
+  .scrollDownButton {
+    @apply bottom-0 z-10 flex w-full cursor-default items-center justify-center bg-popover py-1 [&_svg:not([class*='size-'])]:size-4;
+  }
+}

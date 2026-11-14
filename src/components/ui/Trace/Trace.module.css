@@ -1,0 +1,61 @@
+/*
+ * Trace styles, one class per slot/variant. Markup lives in Trace.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex w-full min-w-0 flex-col *:has-[>[data-slot=trace-line]]:flex;
+    @apply *:has-[>[data-slot=trace-line]]:w-fit *:has-[>[data-slot=trace-line]]:max-w-full;
+    @apply *:has-[>[data-slot=trace-line]]:min-w-0;
+    @apply *:has-[>[data-slot=trace-line]]:text-left *:has-[>[data-slot=trace-line]]:outline-none gap-2 *:has-[>[data-slot=trace-line]]:rounded-md *:has-[>[data-slot=trace-line]]:focus-visible:ring-3 *:has-[>[data-slot=trace-line]]:focus-visible:ring-ring/50;
+  }
+
+  .line {
+    @apply flex w-fit max-w-full min-w-0 items-center gap-2 text-muted-foreground transition-colors;
+    @apply in-[a,button]:cursor-pointer in-[a:hover,button:hover]:text-foreground data-[status=error]:text-destructive;
+    @apply data-[status=error]:in-[a:hover,button:hover]:text-destructive data-[status=pending]:opacity-60;
+    @apply data-[status=running]:*:data-[slot=trace-title]:shimmer text-sm;
+  }
+
+  .icon {
+    @apply flex shrink-0 items-center justify-center [&_svg]:pointer-events-none;
+    @apply [[data-slot=trace-title]~&]:-ml-1 size-4 [&_svg:not([class*='size-'])]:size-4;
+  }
+
+  .title {
+    @apply min-w-0 truncate motion-reduce:shimmer-none;
+  }
+
+  .description {
+    @apply shrink-0 text-muted-foreground/70 tabular-nums;
+  }
+
+  .collapsible {
+    @apply flex w-full min-w-0 flex-col;
+  }
+
+  .collapsibleTrigger {
+    @apply flex w-fit max-w-full min-w-0 cursor-pointer items-center gap-1 text-left text-muted-foreground;
+    @apply transition-colors outline-none hover:text-foreground;
+    @apply has-[[data-status=error]]:text-destructive rounded-md focus-visible:ring-3 focus-visible:ring-ring/50;
+  }
+
+  .collapsibleTrigger-traceIcon {
+    @apply transition-transform group-aria-expanded/trace-collapsible-trigger:rotate-90;
+  }
+
+  .collapsibleContent {
+    @apply h-(--collapsible-panel-height) min-w-0 overflow-hidden transition-[height] duration-200 data-ending-style:h-0;
+    @apply data-starting-style:h-0;
+  }
+
+  .collapsibleContentInner {
+    @apply mb-1 min-w-0 border-l pr-1 wrap-break-word text-muted-foreground mt-2 ml-[calc(--spacing(2)-1px)] pl-4 leading-relaxed;
+  }
+}

@@ -1,0 +1,47 @@
+/*
+ * Accordion styles, one class per slot/variant. Markup lives in Accordion.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex w-full flex-col;
+  }
+
+  .item {
+    @apply not-last:border-b;
+  }
+
+  .trigger-header {
+    @apply flex;
+  }
+
+  .trigger {
+    @apply relative flex flex-1 items-start justify-between border border-transparent text-left;
+    @apply font-medium transition-all outline-none hover:underline aria-disabled:pointer-events-none;
+    @apply aria-disabled:opacity-50 **:data-[slot=accordion-trigger-icon]:ml-auto;
+    @apply **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground rounded-md py-4 text-sm focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:after:border-ring;
+  }
+
+  .triggerIcon {
+    @apply pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden;
+  }
+
+  .triggerIcon-2 {
+    @apply pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline;
+  }
+
+  .content {
+    @apply overflow-hidden data-open:animate-accordion-down data-closed:animate-accordion-up text-sm;
+  }
+
+  .content-2 {
+    @apply h-(--accordion-panel-height) pt-0 pb-4 data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline;
+    @apply [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4;
+  }
+}

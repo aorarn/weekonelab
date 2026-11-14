@@ -1,0 +1,30 @@
+/*
+ * ToggleGroup styles, one class per slot/variant. Markup lives in ToggleGroup.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-md;
+    @apply data-vertical:flex-col data-vertical:items-stretch data-[spacing=0]:data-[variant=outline]:shadow-xs;
+  }
+
+  .item {
+    @apply shrink-0 group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 focus:z-10;
+    @apply focus-visible:z-10 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5;
+    @apply group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5;
+    @apply group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-md;
+    @apply group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-md;
+    @apply group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-md;
+    @apply group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-md;
+    @apply group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0;
+    @apply group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0;
+    @apply group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l;
+    @apply group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t group-data-[spacing=0]/toggle-group:shadow-none data-[state=on]:bg-muted;
+  }
+}

@@ -1,0 +1,17 @@
+/*
+ * Label styles, one class per slot/variant. Markup lives in Label.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex items-center gap-2 leading-none font-medium select-none;
+    @apply group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50;
+    @apply peer-disabled:cursor-not-allowed peer-disabled:opacity-50 text-sm;
+  }
+}

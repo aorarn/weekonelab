@@ -1,0 +1,48 @@
+/*
+ * InputOTP styles, one class per slot (matches each element's `data-slot`).
+ * Markup lives in InputOTP.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  /* ---------- Root ---------- */
+  .container {
+    @apply flex items-center has-disabled:opacity-50;
+  }
+
+  .input {
+    @apply disabled:cursor-not-allowed;
+  }
+
+  /* ---------- Group ---------- */
+  .group {
+    @apply flex items-center rounded-md;
+    @apply has-aria-invalid:border-destructive has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40 has-aria-invalid:ring-3;
+  }
+
+  /* ---------- Slot ---------- */
+  .slot {
+    @apply relative flex items-center justify-center border-y border-r border-input transition-all outline-none first:rounded-l-md first:border-l last:rounded-r-md dark:bg-input/30;
+    @apply aria-invalid:border-destructive;
+    @apply data-[active=true]:z-10 data-[active=true]:border-ring;
+    @apply data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:data-[active=true]:aria-invalid:ring-destructive/40 size-9 text-sm shadow-xs data-[active=true]:ring-3 data-[active=true]:ring-ring/50;
+  }
+
+  .caret {
+    @apply pointer-events-none absolute inset-0 flex items-center justify-center;
+  }
+
+  .caret-line {
+    @apply h-4 w-px animate-caret-blink bg-foreground duration-1000;
+  }
+
+  /* ---------- Separator ---------- */
+  .separator {
+    @apply flex items-center [&_svg:not([class*='size-'])]:size-4;
+  }
+}

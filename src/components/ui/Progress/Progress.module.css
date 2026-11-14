@@ -1,0 +1,31 @@
+/*
+ * Progress styles, one class per slot/variant. Markup lives in Progress.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex flex-wrap gap-3;
+  }
+
+  .track {
+    @apply relative flex w-full items-center overflow-x-hidden bg-muted h-1.5 rounded-full;
+  }
+
+  .indicator {
+    @apply h-full bg-primary transition-all;
+  }
+
+  .label {
+    @apply font-medium text-sm;
+  }
+
+  .value {
+    @apply ml-auto text-muted-foreground tabular-nums text-sm;
+  }
+}

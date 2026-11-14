@@ -1,0 +1,37 @@
+/*
+ * ButtonGroup styles, one class per slot/variant. Markup lives in ButtonGroup.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2;
+    @apply has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md;
+    @apply [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1;
+  }
+
+  .orientation-horizontal {
+    @apply *:data-slot:rounded-r-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-md!;
+    @apply [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0;
+  }
+
+  .orientation-vertical {
+    @apply flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-md!;
+    @apply [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0;
+  }
+
+  .text {
+    @apply flex items-center gap-2 rounded-md border bg-muted px-2.5 font-medium;
+    @apply [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 text-sm shadow-xs;
+  }
+
+  .separator {
+    @apply relative self-stretch bg-input data-horizontal:mx-px data-horizontal:w-auto data-vertical:my-px;
+    @apply data-vertical:h-auto;
+  }
+}

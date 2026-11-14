@@ -1,0 +1,37 @@
+/*
+ * Popover styles, one class per slot/variant. Markup lives in Popover.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .content-positioner {
+    @apply isolate z-50;
+  }
+
+  .content {
+    @apply z-50 flex w-72 origin-(--transform-origin) flex-col gap-4 bg-popover;
+    @apply text-popover-foreground shadow-md ring-1 ring-foreground/10 outline-hidden duration-100;
+    @apply data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2;
+    @apply data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2;
+    @apply data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in;
+    @apply data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0;
+    @apply data-closed:zoom-out-95 rounded-md p-4 text-sm;
+  }
+
+  .header {
+    @apply flex flex-col gap-1 text-sm;
+  }
+
+  .title {
+    @apply font-medium;
+  }
+
+  .description {
+    @apply text-muted-foreground;
+  }
+}

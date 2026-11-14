@@ -1,0 +1,22 @@
+/*
+ * Kbd styles, one class per slot/variant. Markup lives in Kbd.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 bg-muted px-1;
+    @apply font-sans font-medium text-muted-foreground select-none;
+    @apply in-data-[slot=tooltip-content]:bg-background/20 in-data-[slot=tooltip-content]:text-background;
+    @apply dark:in-data-[slot=tooltip-content]:bg-background/10 [&_svg:not([class*='size-'])]:size-3 rounded-sm text-xs;
+  }
+
+  .group {
+    @apply inline-flex items-center gap-1;
+  }
+}

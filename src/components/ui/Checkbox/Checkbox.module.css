@@ -1,0 +1,27 @@
+/*
+ * Checkbox styles, one class per slot/variant. Markup lives in Checkbox.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply relative flex size-4 shrink-0 items-center justify-center rounded-[4px] border border-input transition-shadow;
+    @apply outline-none group-has-disabled/field:opacity-50 group-has-[:focus-visible]/field-label:ring-0;
+    @apply group-has-[:focus-visible]/field-label:not-data-checked:border-input after:absolute after:-inset-x-3;
+    @apply after:-inset-y-2 focus-visible:border-ring;
+    @apply disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive;
+    @apply aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:bg-input/30;
+    @apply dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary;
+    @apply data-checked:bg-primary data-checked:text-primary-foreground;
+    @apply group-has-[:focus-visible]/field-label:data-checked:border-primary dark:data-checked:bg-primary shadow-xs focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:ring-3;
+  }
+
+  .indicator {
+    @apply grid place-content-center text-current transition-none [&>svg]:size-3.5;
+  }
+}

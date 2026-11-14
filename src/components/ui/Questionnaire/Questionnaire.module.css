@@ -1,0 +1,122 @@
+/*
+ * Questionnaire styles, one class per slot/variant. Markup lives in Questionnaire.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply flex w-full min-w-0 flex-col gap-6;
+  }
+
+  .progress {
+    @apply min-h-[1lh] w-fit min-w-[14ch] font-medium text-muted-foreground tabular-nums text-xs;
+  }
+
+  .item {
+    @apply flex min-w-0 flex-col border-0 p-0 outline-none gap-5;
+  }
+
+  .title {
+    @apply font-heading font-semibold text-pretty text-base [&:not(:has(~[data-slot=questionnaire-description]))]:mb-5;
+  }
+
+  .description {
+    @apply text-pretty text-muted-foreground text-sm;
+  }
+
+  .choices {
+    @apply grid min-w-0 gap-3;
+  }
+
+  .choice {
+    @apply relative flex min-h-11 cursor-pointer items-start border border-input;
+    @apply text-start transition-colors outline-none select-none;
+    @apply has-[>input:focus-visible]:border-ring;
+    @apply data-invalid:border-destructive data-checked:border-primary/40;
+    @apply data-disabled:pointer-events-none data-disabled:cursor-not-allowed;
+    @apply data-disabled:opacity-50 gap-3 rounded-md bg-transparent px-4 py-3.5 text-sm shadow-xs hover:bg-muted/50 has-[>input:focus-visible]:ring-3 has-[>input:focus-visible]:ring-ring/50 dark:bg-input/20 data-checked:bg-muted dark:data-checked:bg-muted;
+  }
+
+  .choiceInput {
+    @apply absolute inset-0 z-10 size-full cursor-pointer opacity-0;
+  }
+
+  .choiceIndicator {
+    @apply pointer-events-none relative flex size-4 shrink-0 translate-y-[--spacing(0.45)] items-center justify-center;
+    @apply rounded-[4px] border border-input;
+    @apply group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5;
+    @apply group-data-[type=radio]/questionnaire-choice:rounded-full;
+    @apply group-data-checked/questionnaire-choice:border-primary group-data-checked/questionnaire-choice:bg-primary;
+    @apply group-data-checked/questionnaire-choice:text-primary-foreground dark:bg-input/30;
+    @apply dark:group-data-checked/questionnaire-choice:bg-primary;
+  }
+
+  .choiceIndicatorDot {
+    @apply hidden size-2 rounded-full bg-primary-foreground group-data-[type=checkbox]/questionnaire-choice:hidden;
+    @apply group-data-checked/questionnaire-choice:block;
+  }
+
+  .choiceIndicatorCheck {
+    @apply hidden size-3.5 group-data-[type=radio]/questionnaire-choice:hidden;
+    @apply group-data-checked/questionnaire-choice:block;
+  }
+
+  .choiceLabel {
+    @apply flex min-w-0 flex-1 flex-col leading-snug gap-1;
+  }
+
+  .choiceShortcut {
+    @apply pointer-events-none ms-auto hidden shrink-0 translate-y-[--spacing(0.45)] items-center justify-center;
+    @apply border border-input font-mono leading-none font-medium;
+    @apply text-muted-foreground;
+    @apply group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5;
+    @apply group-data-[shortcut]/questionnaire-choice:inline-flex size-5 rounded-md bg-background text-[0.625rem] shadow-xs;
+  }
+
+  .choiceDescription {
+    @apply text-muted-foreground;
+  }
+
+  .inputWrapper {
+    @apply relative w-full min-w-0;
+  }
+
+  .input {
+    @apply min-h-11 w-full min-w-0 rounded-md border border-input;
+    @apply transition-[color,box-shadow,background-color] outline-none focus-visible:border-ring;
+    @apply disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50;
+    @apply aria-invalid:border-destructive aria-invalid:ring-destructive/20 sm:min-h-0;
+    @apply dark:bg-input/30 dark:aria-invalid:border-destructive/50;
+    @apply dark:aria-invalid:ring-destructive/40 selection:bg-primary selection:text-primary-foreground;
+    @apply placeholder:text-muted-foreground h-9 bg-transparent px-2.5 py-1 text-base shadow-xs focus-visible:ring-3 focus-visible:ring-ring/50 aria-invalid:ring-3 md:text-sm;
+  }
+
+  .error {
+    @apply text-destructive text-sm;
+  }
+
+  .actions {
+    @apply grid min-h-11 w-full grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 sm:min-h-9;
+  }
+
+  .previous {
+    @apply col-start-1 row-start-1 min-h-11 justify-self-start sm:min-h-0;
+  }
+
+  .skip {
+    @apply col-start-2 row-start-1 min-h-11 justify-self-end sm:min-h-0;
+  }
+
+  .next {
+    @apply col-start-3 row-start-1 min-h-11 justify-self-end sm:min-h-0;
+  }
+
+  .submit {
+    @apply col-start-3 row-start-1 min-h-11 justify-self-end sm:min-h-0;
+  }
+}

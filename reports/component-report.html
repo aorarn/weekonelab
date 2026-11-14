@@ -1,0 +1,709 @@
+<title>BOF Component Report</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column; each component gets a spec sheet (live preview → props → usage).
+   Tokens mirror src/app/globals.css so previews match the real components. */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.553 0.195 38.402);
+  --primary-foreground: oklch(0.98 0.016 73.684);
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --stage: oklch(0.975 0.004 60);
+  --code-bg: oklch(0.97 0.004 60);
+  --scrim: oklch(0 0 0 / 0.8);
+  --radius: 0.625rem;
+
+  --font-sans: "Outfit", "IBM Plex Sans Thai", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans Thai", "Outfit", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.47 0.157 37.304);
+    --primary-foreground: oklch(0.98 0.016 73.684);
+    --secondary: oklch(0.274 0.006 286.033);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --stage: oklch(0.175 0.003 60);
+    --code-bg: oklch(0.19 0.004 60);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.47 0.157 37.304);
+  --primary-foreground: oklch(0.98 0.016 73.684);
+  --secondary: oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --stage: oklch(0.175 0.003 60);
+  --code-bg: oklch(0.19 0.004 60);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding-block: 48px 96px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+h1, h2, h3 { font-family: var(--font-sans); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+code, pre, .mono { font-family: var(--font-mono); }
+
+/* ---------- Report header ---------- */
+.masthead { display: grid; gap: 20px; }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted-foreground);
+}
+.masthead h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.masthead h1 span { color: var(--primary); }
+.lede { max-width: 62ch; color: var(--muted-foreground); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-family: var(--font-mono); font-size: 11.5px;
+  padding: 3px 9px; border-radius: 999px;
+  border: 1px solid var(--border); color: var(--muted-foreground);
+}
+.toc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--border); }
+.toc a {
+  display: grid; gap: 2px; padding: 14px 16px 14px 0;
+  color: inherit; text-decoration: none; border-bottom: 1px solid var(--border);
+}
+.toc a:hover strong { color: var(--primary); }
+.toc strong { font-family: var(--font-sans); font-size: 17px; font-weight: 600; }
+.toc span { font-family: var(--font-mono); font-size: 12px; color: var(--muted-foreground); }
+
+/* ---------- Component section ---------- */
+.component { display: grid; gap: 24px; scroll-margin-top: 24px; }
+.component-head { display: grid; gap: 8px; }
+.component-head .path { font-family: var(--font-mono); font-size: 12px; color: var(--muted-foreground); }
+.component-head h2 { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
+.component-head p { max-width: 64ch; color: var(--muted-foreground); }
+.files { display: flex; flex-wrap: wrap; gap: 6px; }
+.files code {
+  font-size: 12px; padding: 2px 8px; border-radius: 6px;
+  background: var(--code-bg); border: 1px solid var(--border);
+}
+
+.block { display: grid; gap: 10px; }
+.block h3 {
+  font-size: 12px; font-weight: 500; font-family: var(--font-mono);
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted-foreground);
+}
+.stage {
+  background: var(--stage);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: grid;
+  gap: 18px;
+  overflow-x: auto;
+}
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.row-label {
+  font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground);
+  width: 100%;
+}
+
+/* ---------- Tables ---------- */
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--font-mono); font-weight: 500; font-size: 11.5px; color: var(--muted-foreground); text-transform: uppercase; letter-spacing: 0.05em; background: var(--code-bg); }
+td code { font-size: 12.5px; white-space: nowrap; }
+td.num { font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 12.5px; white-space: nowrap; }
+
+pre {
+  margin: 0; padding: 16px; border-radius: 12px; overflow-x: auto;
+  background: var(--code-bg); border: 1px solid var(--border);
+  font-size: 12.5px; line-height: 1.6;
+}
+.tk-tag { color: var(--primary); }
+.tk-attr { color: var(--muted-foreground); }
+
+/* =====================================================================
+   Component replicas — values copied from the CSS modules
+   (text-xs/relaxed = 12px / 1.625, rounded-md = radius × 0.8, …)
+   ===================================================================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  gap: 4px; height: 28px; padding: 0 8px;
+  border-radius: calc(var(--radius) * 0.8);
+  border: 1px solid transparent; background-clip: padding-box;
+  font-family: var(--font-sans); font-size: 12px; line-height: 1.625; font-weight: 500;
+  white-space: nowrap; cursor: pointer; user-select: none;
+  background: transparent; color: var(--foreground);
+  transition: background-color .15s, color .15s, transform .05s;
+}
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 2px color-mix(in oklch, var(--ring) 30%, transparent); }
+.btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+.btn[disabled] { opacity: .5; pointer-events: none; }
+.btn.has-start { padding-left: 6px; }
+.btn.has-end { padding-right: 6px; }
+
+.v-default { background: var(--primary); color: var(--primary-foreground); }
+.v-default:hover { background: color-mix(in oklch, var(--primary) 80%, transparent); }
+.v-secondary { background: var(--secondary); color: var(--secondary-foreground); }
+.v-secondary:hover { background: color-mix(in oklch, var(--secondary), var(--foreground) 5%); }
+.v-outline { border-color: var(--border); }
+.v-outline:hover { background: color-mix(in oklch, var(--input) 50%, transparent); }
+.v-ghost:hover { background: var(--muted); }
+.v-destructive { background: color-mix(in oklch, var(--destructive) 10%, transparent); color: var(--destructive); }
+.v-destructive:hover { background: color-mix(in oklch, var(--destructive) 20%, transparent); }
+.v-link { color: var(--primary); }
+.v-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.s-xs { height: 20px; padding: 0 8px; font-size: 10px; border-radius: calc(var(--radius) * 0.6); }
+.s-xs svg { width: 10px; height: 10px; }
+.s-sm { height: 24px; }
+.s-sm svg { width: 12px; height: 12px; }
+.s-lg { height: 32px; padding: 0 10px; }
+.s-lg svg { width: 16px; height: 16px; }
+.s-icon-xs { width: 20px; height: 20px; padding: 0; border-radius: calc(var(--radius) * 0.6); }
+.s-icon-xs svg { width: 10px; height: 10px; }
+.s-icon-sm { width: 24px; height: 24px; padding: 0; }
+.s-icon-sm svg { width: 12px; height: 12px; }
+.s-icon { width: 28px; height: 28px; padding: 0; }
+.s-icon-lg { width: 32px; height: 32px; padding: 0; }
+.s-icon-lg svg { width: 16px; height: 16px; }
+
+/* Card */
+.card {
+  --card-spacing: 16px;
+  display: flex; flex-direction: column; gap: var(--card-spacing);
+  padding-block: var(--card-spacing); overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--card); color: var(--card-foreground);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--foreground) 10%, transparent);
+  font-family: var(--font-sans); font-size: 12px; line-height: 1.625;
+  min-width: 0;
+}
+.card.sm { --card-spacing: 12px; }
+.card-header { display: grid; grid-auto-rows: min-content; align-items: start; gap: 4px; padding-inline: var(--card-spacing); }
+.card-header.with-action { grid-template-columns: 1fr auto; }
+.card-header.bordered { border-bottom: 1px solid var(--border); padding-bottom: var(--card-spacing); }
+.card-title { font-size: 14px; font-weight: 500; }
+.card-description { color: var(--muted-foreground); }
+.card-action { grid-column-start: 2; grid-row: 1 / span 2; align-self: start; justify-self: end; }
+.card-content { padding-inline: var(--card-spacing); }
+.card-footer { display: flex; align-items: center; gap: 8px; padding-inline: var(--card-spacing); }
+.card-footer.bordered { border-top: 1px solid var(--border); padding-top: var(--card-spacing); }
+
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.stat { font-size: 26px; font-weight: 600; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.delta { font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground); }
+.delta.up { color: oklch(0.6 0.14 150); }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0; }
+.kv dt { color: var(--muted-foreground); }
+.kv dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.badge {
+  display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 999px;
+  font-size: 10.5px; font-weight: 500;
+  background: color-mix(in oklch, oklch(0.6 0.14 150) 14%, transparent); color: oklch(0.55 0.14 150);
+}
+
+/* Dialog */
+.dialog-demo { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.size-card { display: grid; gap: 10px; justify-items: start; padding: 14px; border-radius: 10px; background: var(--card); border: 1px solid var(--border); }
+.size-card strong { font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
+.size-card span { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted-foreground); }
+.size-bar { height: 6px; border-radius: 3px; background: var(--primary); opacity: .8; }
+
+.overlay {
+  position: fixed; inset: 0; z-index: 50; background: var(--scrim);
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  display: grid; place-items: center;
+  padding: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  animation: fade .1s ease-out;
+}
+.dialog {
+  position: relative; display: grid; gap: 16px; width: 100%;
+  border-radius: calc(var(--radius) * 1.4); padding: 16px;
+  background: var(--popover); color: var(--popover-foreground);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--foreground) 10%, transparent);
+  font-family: var(--font-sans); font-size: 12px; line-height: 1.625;
+  animation: zoom .1s ease-out;
+}
+.dialog[data-size="sm"] { max-width: 24rem; }
+.dialog[data-size="md"] { max-width: 28rem; }
+.dialog[data-size="lg"] { max-width: 32rem; }
+.dialog[data-size="xl"] { max-width: 42rem; }
+.dialog .close { position: absolute; top: 8px; right: 8px; }
+.dialog-header { display: grid; gap: 4px; }
+.dialog-title { font-size: 14px; font-weight: 500; }
+.dialog-description { color: var(--muted-foreground); }
+.dialog-footer { display: flex; flex-direction: row; justify-content: flex-end; gap: 8px; }
+.field { display: grid; gap: 6px; }
+.field label { font-weight: 500; }
+.field input {
+  height: 28px; padding: 0 8px; border-radius: calc(var(--radius) * 0.8);
+  border: 1px solid var(--input); background: transparent; color: inherit;
+  font: inherit;
+}
+.field input:focus-visible { outline: none; border-color: var(--ring); box-shadow: 0 0 0 2px color-mix(in oklch, var(--ring) 30%, transparent); }
+@keyframes fade { from { opacity: 0 } }
+@keyframes zoom { from { opacity: 0; transform: scale(.95) } }
+
+/* Static (always-visible) dialog preview */
+.dialog-static { max-width: 24rem; margin: 0 auto; animation: none; }
+.stage.scrim { background: color-mix(in oklch, var(--foreground) 55%, var(--background)); }
+
+.summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.summary > div { padding: 16px; display: grid; gap: 4px; border-right: 1px solid var(--border); }
+.summary > div:last-child { border-right: 0; }
+.summary .k { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted-foreground); }
+.summary .v { font-family: var(--font-sans); font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.summary .n { font-size: 13px; color: var(--muted-foreground); }
+
+.rules { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 70ch; }
+.rules code { font-size: 12.5px; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+
+@media (max-width: 720px) {
+  .toc, .cards, .summary { grid-template-columns: 1fr; }
+  .summary > div { border-right: 0; border-bottom: 1px solid var(--border); }
+  .summary > div:last-child { border-bottom: 0; }
+  .dialog-demo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dialog-footer { flex-direction: column-reverse; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .overlay, .dialog { animation: none; }
+  .btn { transition: none; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<main class="page">
+
+  <header class="masthead">
+    <p class="eyebrow">Back Office Design System · Component report</p>
+    <h1>Button, Dialog และ Card<br><span>บน shadcn/ui base-mira</span></h1>
+    <p class="lede">รายงานตัวอย่างของ component ทั้ง 3 ตัวใน <code>src/components/ui/</code> แต่ละตัวมี preview, props, ขนาด และตัวอย่างโค้ด ตัวอย่างในหน้านี้วาดใหม่ด้วย HTML/CSS โดยใช้ token และค่าจาก CSS module จริง หน้าตาจึงใกล้เคียงของจริงในแอป</p>
+    <div class="meta">
+      <span class="chip">Next.js 16</span>
+      <span class="chip">React 19</span>
+      <span class="chip">Base UI</span>
+      <span class="chip">Tailwind v4 · CSS modules</span>
+      <span class="chip">Hugeicons</span>
+      <span class="chip">branch: design-system-components</span>
+    </div>
+    <div class="summary">
+      <div><span class="k">Components</span><span class="v">3</span><span class="n">Button, Dialog, Card</span></div>
+      <div><span class="k">Exports</span><span class="v">20</span><span class="n">2 + 10 + 7 ฟังก์ชัน และอีก 8 type</span></div>
+      <div><span class="k">Build</span><span class="v">ผ่าน</span><span class="n">npm run lint และ npm run build</span></div>
+    </div>
+    <nav class="toc" aria-label="Components">
+      <a href="#button"><strong>Button</strong><span>6 variants · 8 sizes</span></a>
+      <a href="#dialog"><strong>Dialog</strong><span>4 sizes · Base UI Dialog</span></a>
+      <a href="#card"><strong>Card</strong><span>7 slots · 2 sizes</span></a>
+    </nav>
+  </header>
+
+  <!-- ================= BUTTON ================= -->
+  <section class="component" id="button">
+    <div class="component-head">
+      <span class="path">src/components/ui/Button</span>
+      <h2>Button</h2>
+      <p>ปุ่มหลักของระบบ สร้างบน <code>Button</code> ของ Base UI มี <code>variant</code> บอกระดับความสำคัญของ action และ <code>size</code> กำหนดความสูง ถ้าอยากให้ลิงก์หน้าตาเหมือนปุ่ม ใช้ <code>buttonStyles()</code></p>
+      <div class="files"><code>Button.tsx</code><code>Button.module.css</code><code>index.ts</code></div>
+    </div>
+
+    <div class="block">
+      <h3>Variants</h3>
+      <div class="stage">
+        <div class="row">
+          <button class="btn v-default">บันทึก</button>
+          <button class="btn v-secondary">Secondary</button>
+          <button class="btn v-outline">ยกเลิก</button>
+          <button class="btn v-ghost">Ghost</button>
+          <button class="btn v-destructive">ลบผู้ใช้</button>
+          <button class="btn v-link">ดูรายละเอียด</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Sizes · icons · states</h3>
+      <div class="stage">
+        <div class="row">
+          <span class="row-label">size: xs · sm · default · lg</span>
+          <button class="btn v-default s-xs">xs</button>
+          <button class="btn v-default s-sm">sm</button>
+          <button class="btn v-default">default</button>
+          <button class="btn v-default s-lg">lg</button>
+        </div>
+        <div class="row">
+          <span class="row-label">icon-xs · icon-sm · icon · icon-lg</span>
+          <button class="btn v-outline s-icon-xs" aria-label="ตั้งค่า"><svg><use href="#i-gear"/></svg></button>
+          <button class="btn v-outline s-icon-sm" aria-label="ตั้งค่า"><svg><use href="#i-gear"/></svg></button>
+          <button class="btn v-outline s-icon" aria-label="ตั้งค่า"><svg><use href="#i-gear"/></svg></button>
+          <button class="btn v-outline s-icon-lg" aria-label="ตั้งค่า"><svg><use href="#i-gear"/></svg></button>
+        </div>
+        <div class="row">
+          <span class="row-label">data-icon="inline-start" / "inline-end" · disabled</span>
+          <button class="btn v-default has-start"><svg><use href="#i-plus"/></svg>เพิ่มผู้ใช้</button>
+          <button class="btn v-outline has-start"><svg><use href="#i-down"/></svg>Export CSV</button>
+          <button class="btn v-secondary has-end">ถัดไป<svg><use href="#i-arrow"/></svg></button>
+          <button class="btn v-destructive has-start"><svg><use href="#i-trash"/></svg>ลบ</button>
+          <button class="btn v-default" disabled>กำลังบันทึก…</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Props</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>หมายเหตุ</th></tr></thead>
+          <tbody>
+            <tr><td><code>variant</code></td><td><code>default | secondary | outline | ghost | destructive | link</code></td><td><code>default</code></td><td>ระดับความสำคัญของ action</td></tr>
+            <tr><td><code>size</code></td><td><code>xs | sm | default | lg | icon-xs | icon-sm | icon | icon-lg</code></td><td><code>default</code></td><td><code>icon*</code> คือปุ่มสี่เหลี่ยมจัตุรัสที่มีแต่ไอคอน</td></tr>
+            <tr><td><code>render</code></td><td><code>ReactElement</code></td><td>—</td><td>ของ Base UI ใช้แทน <code>asChild</code> ของ Radix</td></tr>
+            <tr><td><code>className</code></td><td><code>string | (state) =&gt; string</code></td><td>—</td><td>merge ไว้ท้ายสุด จึงทับสไตล์เดิมได้</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Size scale</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Size</th><th>ความสูง</th><th>ไอคอน</th><th>ตัวอักษร</th></tr></thead>
+          <tbody>
+            <tr><td><code>xs</code> / <code>icon-xs</code></td><td class="num">20px</td><td class="num">10px</td><td class="num">10px</td></tr>
+            <tr><td><code>sm</code> / <code>icon-sm</code></td><td class="num">24px</td><td class="num">12px</td><td class="num">12px</td></tr>
+            <tr><td><code>default</code> / <code>icon</code></td><td class="num">28px</td><td class="num">14px</td><td class="num">12px</td></tr>
+            <tr><td><code>lg</code> / <code>icon-lg</code></td><td class="num">32px</td><td class="num">16px</td><td class="num">12px</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Usage</h3>
+<pre><code>import { Button, buttonStyles } from "@/components/ui/Button"
+
+&lt;Button variant="outline" size="sm"&gt;ยกเลิก&lt;/Button&gt;
+
+&lt;Button&gt;
+  &lt;HugeiconsIcon icon={Add01Icon} strokeWidth={2} data-icon="inline-start" /&gt;
+  เพิ่มผู้ใช้
+&lt;/Button&gt;
+
+// ให้ลิงก์หน้าตาเหมือนปุ่ม
+&lt;Link href="/register" className={buttonStyles({ variant: "link" })}&gt;สมัครสมาชิก&lt;/Link&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ================= DIALOG ================= -->
+  <section class="component" id="dialog">
+    <div class="component-head">
+      <span class="path">src/components/ui/Dialog</span>
+      <h2>Dialog</h2>
+      <p>Modal ที่ห่อ <code>Dialog</code> ของ Base UI มี overlay เบลอพื้นหลัง และมีปุ่ม × ปิดที่มุมบนขวาเป็นค่าเริ่มต้น <code>size</code> กำหนดความกว้างสูงสุดตั้งแต่ breakpoint <code>sm</code> ขึ้นไป ส่วนจอมือถือ dialog จะกว้างเต็มจอโดยเว้นขอบ 1rem</p>
+      <div class="files"><code>Dialog.tsx</code><code>Dialog.module.css</code><code>index.ts</code></div>
+    </div>
+
+    <div class="block">
+      <h3>Anatomy</h3>
+      <div class="stage scrim">
+        <div class="dialog dialog-static" data-size="sm">
+          <div class="dialog-header">
+            <div class="dialog-title">แก้ไขโปรไฟล์</div>
+            <div class="dialog-description">แก้ข้อมูลบัญชีแล้วกดบันทึก การเปลี่ยนแปลงจะมีผลทันที</div>
+          </div>
+          <div class="field"><label for="dn">ชื่อที่แสดง</label><input id="dn" value="Nutthapong J."></div>
+          <div class="dialog-footer">
+            <button class="btn v-outline">ยกเลิก</button>
+            <button class="btn v-default">บันทึก</button>
+          </div>
+          <button class="btn v-ghost s-icon-sm close" aria-label="Close"><svg><use href="#i-x"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Sizes · กดเพื่อเปิด dialog จริง</h3>
+      <div class="dialog-demo">
+        <div class="size-card"><strong>sm</strong><span>max-w 24rem · 384px</span><div class="size-bar" style="width:57%"></div><button class="btn v-outline s-sm" data-open="sm">เปิด sm</button></div>
+        <div class="size-card"><strong>md</strong><span>max-w 28rem · 448px</span><div class="size-bar" style="width:67%"></div><button class="btn v-outline s-sm" data-open="md">เปิด md</button></div>
+        <div class="size-card"><strong>lg</strong><span>max-w 32rem · 512px</span><div class="size-bar" style="width:76%"></div><button class="btn v-outline s-sm" data-open="lg">เปิด lg</button></div>
+        <div class="size-card"><strong>xl</strong><span>max-w 42rem · 672px</span><div class="size-bar" style="width:100%"></div><button class="btn v-outline s-sm" data-open="xl">เปิด xl</button></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Exports &amp; props</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Part</th><th>Prop</th><th>Default</th><th>หมายเหตุ</th></tr></thead>
+          <tbody>
+            <tr><td><code>Dialog</code></td><td><code>open</code>, <code>onOpenChange</code></td><td>—</td><td>Root ของ Base UI ใช้ได้ทั้งแบบ controlled และ uncontrolled</td></tr>
+            <tr><td><code>DialogTrigger</code></td><td><code>render</code></td><td>—</td><td>ส่ง <code>render={&lt;Button /&gt;}</code> เพื่อใช้ Button เป็นตัวเปิด</td></tr>
+            <tr><td><code>DialogContent</code></td><td><code>size</code></td><td><code>sm</code></td><td><code>sm | md | lg | xl</code></td></tr>
+            <tr><td></td><td><code>showCloseButton</code></td><td><code>true</code></td><td>ปุ่ม × มุมบนขวา (Button ghost icon-sm)</td></tr>
+            <tr><td><code>DialogFooter</code></td><td><code>showCloseButton</code></td><td><code>false</code></td><td>เพิ่มปุ่ม outline “Close” ต่อท้าย</td></tr>
+            <tr><td><code>DialogHeader</code>, <code>DialogTitle</code>, <code>DialogDescription</code></td><td>—</td><td>—</td><td>Title และ Description ผูก aria ให้อัตโนมัติ</td></tr>
+            <tr><td><code>DialogClose</code>, <code>DialogPortal</code>, <code>DialogOverlay</code></td><td>—</td><td>—</td><td>ส่วนย่อยระดับล่าง ใช้เวลาต้องประกอบ dialog เอง</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Usage</h3>
+<pre><code>&lt;Dialog&gt;
+  &lt;DialogTrigger render={&lt;Button variant="destructive" /&gt;}&gt;ลบผู้ใช้&lt;/DialogTrigger&gt;
+  &lt;DialogContent size="sm"&gt;
+    &lt;DialogHeader&gt;
+      &lt;DialogTitle&gt;ลบผู้ใช้นี้?&lt;/DialogTitle&gt;
+      &lt;DialogDescription&gt;บัญชีและข้อมูลทั้งหมดจะถูกลบถาวร&lt;/DialogDescription&gt;
+    &lt;/DialogHeader&gt;
+    &lt;DialogFooter showCloseButton&gt;
+      &lt;Button variant="destructive"&gt;ลบ&lt;/Button&gt;
+    &lt;/DialogFooter&gt;
+  &lt;/DialogContent&gt;
+&lt;/Dialog&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ================= CARD ================= -->
+  <section class="component" id="card">
+    <div class="component-head">
+      <span class="path">src/components/ui/Card</span>
+      <h2>Card</h2>
+      <p>กล่องจัดกลุ่มเนื้อหา ใช้กับ dashboard, หน้ารายละเอียดบัญชี และฟอร์ม Login/Register ระยะห่างทุกส่วนอิงตัวแปร <code>--card-spacing</code> ตัวเดียว ซึ่ง prop <code>size</code> เป็นตัวกำหนด ถ้าใส่ <code>CardAction</code> ใน header ระบบจะจัดเป็น 2 คอลัมน์ให้เอง</p>
+      <div class="files"><code>Card.tsx</code><code>Card.module.css</code><code>index.ts</code></div>
+    </div>
+
+    <div class="block">
+      <h3>ตัวอย่างใน Back Office</h3>
+      <div class="stage">
+        <div class="cards">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-description">ผู้ใช้ที่ใช้งานอยู่</div>
+              <div class="card-title stat">12,480</div>
+            </div>
+            <div class="card-content"><span class="delta up">+4.2% จากเดือนที่แล้ว</span></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-description">คำสั่งซื้อรอตรวจสอบ</div>
+              <div class="card-title stat">37</div>
+            </div>
+            <div class="card-content"><span class="delta">ล่าสุด 10 นาทีที่แล้ว</span></div>
+          </div>
+          <div class="card sm">
+            <div class="card-header">
+              <div class="card-description">size="sm" · spacing 12px</div>
+              <div class="card-title stat">฿ 284,900</div>
+            </div>
+            <div class="card-content"><span class="delta up">ยอดขายวันนี้</span></div>
+          </div>
+        </div>
+
+        <div class="cards" style="grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);">
+          <div class="card">
+            <div class="card-header with-action bordered">
+              <div class="card-title">รายละเอียดบัญชี</div>
+              <div class="card-description">ข้อมูลผู้ใช้และสถานะ</div>
+              <div class="card-action"><button class="btn v-outline s-sm">แก้ไข</button></div>
+            </div>
+            <div class="card-content">
+              <dl class="kv">
+                <dt>ชื่อ</dt><dd>Nutthapong J.</dd>
+                <dt>อีเมล</dt><dd>admin@bof.test</dd>
+                <dt>บทบาท</dt><dd>Administrator</dd>
+                <dt>สถานะ</dt><dd><span class="badge">Active</span></dd>
+                <dt>เข้าสู่ระบบล่าสุด</dt><dd>7 พ.ย. 2026 · 09:42</dd>
+              </dl>
+            </div>
+            <div class="card-footer bordered">
+              <button class="btn v-ghost s-sm">รีเซ็ตรหัสผ่าน</button>
+              <span style="flex:1"></span>
+              <button class="btn v-destructive s-sm">ระงับบัญชี</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">เข้าสู่ระบบ</div>
+              <div class="card-description">ใช้บัญชี Back Office ของคุณ</div>
+            </div>
+            <div class="card-content" style="display:grid; gap:12px;">
+              <div class="field"><label for="em">อีเมล</label><input id="em" type="email" value="admin@bof.test"></div>
+              <div class="field"><label for="pw">รหัสผ่าน</label><input id="pw" type="password" value="••••••••"></div>
+            </div>
+            <div class="card-footer" style="flex-direction:column; align-items:stretch;">
+              <button class="btn v-default">เข้าสู่ระบบ</button>
+              <button class="btn v-link">ยังไม่มีบัญชี? สมัครสมาชิก</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Slots</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Part</th><th>data-slot</th><th>หน้าที่</th></tr></thead>
+          <tbody>
+            <tr><td><code>Card</code></td><td><code>card</code></td><td>กรอบนอก มี prop <code>size: "default" | "sm"</code> (spacing 16px / 12px) ถ้ามีรูปเป็นลูกตัวแรก ขอบบนจะชิดรูปพอดี</td></tr>
+            <tr><td><code>CardHeader</code></td><td><code>card-header</code></td><td>grid หัวการ์ด ใส่ class <code>border-b</code> แล้วจะได้เส้นคั่นพร้อมระยะห่าง</td></tr>
+            <tr><td><code>CardTitle</code></td><td><code>card-title</code></td><td>14px medium</td></tr>
+            <tr><td><code>CardDescription</code></td><td><code>card-description</code></td><td>12px สี muted-foreground</td></tr>
+            <tr><td><code>CardAction</code></td><td><code>card-action</code></td><td>วางไว้มุมขวาบนของ header</td></tr>
+            <tr><td><code>CardContent</code></td><td><code>card-content</code></td><td>เนื้อหาหลัก เว้นขอบซ้ายขวาตาม spacing</td></tr>
+            <tr><td><code>CardFooter</code></td><td><code>card-footer</code></td><td>แถว flex สำหรับ action ใส่ class <code>border-t</code> แล้วจะได้เส้นคั่น</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block">
+      <h3>Usage</h3>
+<pre><code>import { Card, CardAction, CardContent, CardDescription,
+  CardFooter, CardHeader, CardTitle } from "@/components/ui/Card"
+
+&lt;Card&gt;
+  &lt;CardHeader className="border-b"&gt;
+    &lt;CardTitle&gt;รายละเอียดบัญชี&lt;/CardTitle&gt;
+    &lt;CardDescription&gt;ข้อมูลผู้ใช้และสถานะ&lt;/CardDescription&gt;
+    &lt;CardAction&gt;&lt;Button variant="outline" size="sm"&gt;แก้ไข&lt;/Button&gt;&lt;/CardAction&gt;
+  &lt;/CardHeader&gt;
+  &lt;CardContent&gt;…&lt;/CardContent&gt;
+  &lt;CardFooter className="border-t"&gt;…&lt;/CardFooter&gt;
+&lt;/Card&gt;</code></pre>
+    </div>
+  </section>
+
+  <section class="component" id="rules">
+    <div class="component-head">
+      <span class="path">Conventions</span>
+      <h2>กติกาเมื่อเพิ่ม component ใหม่</h2>
+    </div>
+    <ol class="rules">
+      <li>รัน <code>npx shadcn@latest add &lt;name&gt;</code> แล้วย้ายไฟล์ไปไว้ในโฟลเดอร์ <code>ui/&lt;Name&gt;/</code></li>
+      <li><code>&lt;Name&gt;.tsx</code> มีแค่ markup กับ props ที่กำหนด type ไว้ ห้ามใส่ Tailwind class และให้ map prop ไปเป็น class ใน module เช่น <code>styles[`size-${size}`]</code></li>
+      <li><code>&lt;Name&gt;.module.css</code> ขึ้นต้นด้วย <code>@reference</code> ไปที่ globals.css และเขียนทุก rule ไว้ใน <code>@layer components</code></li>
+      <li>ใส่ <code>data-slot</code> ให้ทุก element ใส่ <code>data-variant</code> / <code>data-size</code> ตามที่มี แล้ว merge <code>className</code> ไว้ท้ายสุดด้วย <code>cn</code> หรือ <code>mergeClassName</code></li>
+      <li><code>index.ts</code> export ส่วนที่ใช้ภายนอก และ import จากโฟลเดอร์เสมอ เช่น <code>@/components/ui/Card</code></li>
+    </ol>
+  </section>
+</main>
+
+<div id="dlg-root"></div>
+
+<script>
+(function () {
+  const root = document.getElementById("dlg-root");
+  const copy = {
+    sm: ["ยืนยันการลบ", "ลบผู้ใช้ “somchai@bof.test” ออกจากระบบ การลบนี้ย้อนกลับไม่ได้"],
+    md: ["เชิญผู้ใช้ใหม่", "ระบบจะส่งลิงก์ตั้งรหัสผ่านไปที่อีเมลนี้ ลิงก์มีอายุ 24 ชั่วโมง"],
+    lg: ["แก้ไขสิทธิ์การเข้าถึง", "เลือกบทบาทของผู้ใช้ สิทธิ์จะมีผลตั้งแต่การเข้าสู่ระบบครั้งถัดไป"],
+    xl: ["ประวัติการใช้งาน", "dialog ขนาด xl เหมาะกับตารางหรือเนื้อหาที่ยาว เช่น audit log ของบัญชี"]
+  };
+  let lastFocus = null;
+
+  function close() {
+    root.innerHTML = "";
+    document.removeEventListener("keydown", onKey);
+    if (lastFocus) lastFocus.focus();
+  }
+  function onKey(e) { if (e.key === "Escape") close(); }
+
+  function open(size, trigger) {
+    lastFocus = trigger;
+    const [title, desc] = copy[size];
+    const destructive = size === "sm";
+    root.innerHTML =
+      '<div class="overlay" data-overlay>' +
+        '<div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-t" aria-describedby="dlg-d" data-size="' + size + '">' +
+          '<div class="dialog-header">' +
+            '<div class="dialog-title" id="dlg-t">' + title + '</div>' +
+            '<div class="dialog-description" id="dlg-d">' + desc + '</div>' +
+          '</div>' +
+          '<div class="dialog-footer">' +
+            '<button class="btn v-outline" data-close>ยกเลิก</button>' +
+            '<button class="btn ' + (destructive ? "v-destructive" : "v-default") + '" data-close>' + (destructive ? "ลบ" : "ยืนยัน") + '</button>' +
+          '</div>' +
+          '<button class="btn v-ghost s-icon-sm close" aria-label="Close" data-close><svg><use href="#i-x"/></svg></button>' +
+        '</div>' +
+      '</div>';
+    const overlay = root.querySelector("[data-overlay]");
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay || e.target.closest("[data-close]")) close();
+    });
+    document.addEventListener("keydown", onKey);
+    root.querySelector(".dialog-footer .btn").focus();
+  }
+
+  document.querySelectorAll("[data-open]").forEach((b) =>
+    b.addEventListener("click", () => open(b.dataset.open, b))
+  );
+})();
+</script>

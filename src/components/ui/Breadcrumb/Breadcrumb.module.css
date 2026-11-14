@@ -1,0 +1,39 @@
+/*
+ * Breadcrumb styles, one class per slot/variant. Markup lives in Breadcrumb.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .list {
+    @apply flex flex-wrap items-center gap-1.5 wrap-break-word text-muted-foreground text-sm sm:gap-2.5;
+  }
+
+  .item {
+    @apply inline-flex items-center gap-1.5;
+  }
+
+  .link {
+    @apply transition-colors hover:text-foreground;
+  }
+
+  .page {
+    @apply font-normal text-foreground;
+  }
+
+  .separator {
+    @apply [&>svg]:size-3.5;
+  }
+
+  .ellipsis {
+    @apply flex items-center justify-center size-5 [&>svg]:size-4;
+  }
+
+  .ellipsis-span {
+    @apply sr-only;
+  }
+}

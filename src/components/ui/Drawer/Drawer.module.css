@@ -1,0 +1,108 @@
+/*
+ * Drawer styles, one class per slot/variant. Markup lives in Drawer.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .overlay {
+    @apply fixed inset-0 z-50 min-h-dvh;
+    @apply opacity-[max(var(--drawer-overlay-min-opacity,0),calc(1-var(--drawer-swipe-progress)))] transition-opacity;
+    @apply duration-450 ease-[cubic-bezier(0.32,0.72,0,1)] select-none data-ending-style:pointer-events-none;
+    @apply data-ending-style:opacity-0 data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)];
+    @apply data-snap-points:[--drawer-overlay-min-opacity:0.5] data-starting-style:opacity-0 data-swiping:duration-0;
+    @apply supports-backdrop-filter:backdrop-blur-xs supports-[-webkit-touch-callout:none]:absolute bg-black/10;
+  }
+
+  .swipeHandle {
+    @apply relative z-10 flex shrink-0 cursor-grab transition-opacity duration-200;
+    @apply group-data-nested-drawer-open/drawer-popup:opacity-0 group-data-nested-drawer-swiping/drawer-popup:opacity-100;
+    @apply group-data-[swipe-axis=x]/drawer-popup:h-full group-data-[swipe-axis=x]/drawer-popup:w-3;
+    @apply group-data-[swipe-axis=x]/drawer-popup:items-center group-data-[swipe-axis=y]/drawer-popup:h-3;
+    @apply group-data-[swipe-axis=y]/drawer-popup:w-full group-data-[swipe-axis=y]/drawer-popup:justify-center;
+    @apply group-data-[swipe-direction=down]/drawer-popup:items-end;
+    @apply group-data-[swipe-direction=left]/drawer-popup:order-last;
+    @apply group-data-[swipe-direction=left]/drawer-popup:justify-start;
+    @apply group-data-[swipe-direction=right]/drawer-popup:justify-end;
+    @apply group-data-[swipe-direction=up]/drawer-popup:order-last;
+    @apply group-data-[swipe-direction=up]/drawer-popup:items-start after:block after:shrink-0 after:rounded-full;
+    @apply after:bg-muted;
+    @apply active:cursor-grabbing group-data-[swipe-axis=x]/drawer-popup:after:h-[100px] group-data-[swipe-axis=x]/drawer-popup:after:w-1.5 group-data-[swipe-axis=y]/drawer-popup:after:h-1.5 group-data-[swipe-axis=y]/drawer-popup:after:w-[100px];
+  }
+
+  .viewport {
+    @apply pointer-events-none fixed inset-0 z-50 select-none data-[modal=true]:pointer-events-auto;
+  }
+
+  .popup {
+    @apply pointer-events-auto fixed z-50 m-(--drawer-inset,0px) flex h-(--drawer-content-height);
+    @apply max-h-(--drawer-content-max-height,none) min-h-0 w-(--drawer-content-width,auto);
+    @apply transform-[translate3d(var(--translate-x,0px),var(--translate-y,0px),0)_scale(var(--stack-scale))] flex-col;
+    @apply bg-popover text-popover-foreground;
+    @apply transition-[transform,height,opacity,filter] duration-450 ease-[cubic-bezier(0.22,1,0.36,1)];
+    @apply will-change-transform outline-none select-none;
+    @apply [interpolate-size:allow-keywords];
+    @apply data-nested-drawer-open:overflow-hidden data-nested-drawer-open:brightness-95 after:pointer-events-none;
+    @apply after:absolute after:bg-(--drawer-bleed-background,var(--color-popover)) data-[swipe-axis=x]:after:inset-y-0;
+    @apply data-[swipe-axis=x]:after:w-(--bleed) data-[swipe-axis=y]:after:inset-x-0;
+    @apply data-[swipe-axis=y]:after:h-(--bleed) data-[swipe-direction=down]:after:top-full;
+    @apply data-[swipe-direction=left]:after:right-full data-[swipe-direction=right]:after:left-full;
+    @apply data-[swipe-direction=up]:after:bottom-full [--drawer-content-height:var(--drawer-height,auto)];
+    @apply data-[swipe-axis=x]:[--drawer-content-width:75%];
+    @apply data-[swipe-axis=y]:[--drawer-content-max-height:calc(100dvh-6rem)];
+    @apply data-[swipe-axis=y]:data-snap-points:[--drawer-content-height:100dvh];
+    @apply data-[swipe-axis=x]:sm:[--drawer-content-width:24rem] [--bleed:3rem] [--peek:1rem];
+    @apply [--stack-height:var(--drawer-frontmost-height,var(--drawer-height,0px))];
+    @apply [--stack-peek-offset:max(0px,calc((var(--nested-drawers)-var(--stack-progress))*var(--peek)))];
+    @apply [--stack-progress:clamp(0,var(--drawer-swipe-progress),1)];
+    @apply [--stack-scale-base:max(0,calc(1-(var(--nested-drawers)*var(--stack-step))))];
+    @apply [--stack-scale:clamp(0,calc(var(--stack-scale-base)+(var(--stack-step)*var(--stack-progress))),1)];
+    @apply [--stack-shrink:calc(1-var(--stack-scale))] [--stack-step:0.05];
+    @apply data-ending-style:transform-(--closed-transform) data-ending-style:opacity-[0.9999];
+    @apply data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-nested-drawer-swiping:duration-0;
+    @apply data-ending-style:data-nested-drawer-swiping:duration-[calc(var(--drawer-swipe-strength)*400ms)];
+    @apply data-starting-style:transform-(--closed-transform) data-swiping:duration-0;
+    @apply data-ending-style:data-swiping:duration-[calc(var(--drawer-swipe-strength)*400ms)];
+    @apply data-[swipe-axis=y]:inset-x-0 data-[swipe-axis=y]:data-nested-drawer-open:h-(--stack-height);
+    @apply data-[swipe-axis=x]:inset-y-0 data-[swipe-axis=x]:flex-row data-[swipe-direction=down]:bottom-0;
+    @apply data-[swipe-direction=down]:origin-bottom;
+    @apply data-[swipe-direction=down]:[--closed-transform:translate3d(0,calc(100%+var(--drawer-inset,0px)+2px),0)];
+    @apply data-[swipe-direction=down]:[--translate-y:calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y)-var(--stack-peek-offset)-(var(--stack-shrink)*var(--stack-height)))];
+    @apply data-[swipe-direction=up]:top-0 data-[swipe-direction=up]:origin-top;
+    @apply data-[swipe-direction=up]:[--closed-transform:translate3d(0,calc(-100%-var(--drawer-inset,0px)-2px),0)];
+    @apply data-[swipe-direction=up]:[--translate-y:calc(var(--drawer-snap-point-offset,0px)+var(--drawer-swipe-movement-y)+var(--stack-peek-offset)+(var(--stack-shrink)*var(--stack-height)))];
+    @apply data-[swipe-direction=left]:left-0 data-[swipe-direction=left]:origin-left;
+    @apply data-[swipe-direction=left]:[--closed-transform:translate3d(calc(-100%-var(--drawer-inset,0px)-2px),0,0)];
+    @apply data-[swipe-direction=left]:[--translate-x:calc(var(--drawer-swipe-movement-x)+var(--stack-peek-offset)+(var(--stack-shrink)*100%))];
+    @apply data-[swipe-direction=right]:right-0 data-[swipe-direction=right]:origin-right;
+    @apply data-[swipe-direction=right]:[--closed-transform:translate3d(calc(100%+var(--drawer-inset,0px)+2px),0,0)];
+    @apply data-[swipe-direction=right]:[--translate-x:calc(var(--drawer-swipe-movement-x)-var(--stack-peek-offset)-(var(--stack-shrink)*100%))] text-sm data-[swipe-direction=down]:rounded-t-xl data-[swipe-direction=down]:border-t data-[swipe-direction=left]:rounded-r-xl data-[swipe-direction=left]:border-r data-[swipe-direction=right]:rounded-l-xl data-[swipe-direction=right]:border-l data-[swipe-direction=up]:rounded-b-xl data-[swipe-direction=up]:border-b;
+  }
+
+  .content {
+    @apply flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain rounded-[inherit] transition-opacity;
+    @apply duration-300 ease-[cubic-bezier(0.45,1.005,0,1.005)] select-text;
+    @apply group-data-nested-drawer-open/drawer-popup:opacity-0 group-data-nested-drawer-swiping/drawer-popup:opacity-100;
+    @apply group-data-swiping/drawer-popup:select-none;
+  }
+
+  .header {
+    @apply flex shrink-0 flex-col p-4 pb-0 group-data-[swipe-axis=y]/drawer-popup:text-center md:text-left gap-0.5 md:gap-1.5;
+  }
+
+  .footer {
+    @apply mt-auto flex shrink-0 flex-col gap-2 p-4 pt-0;
+  }
+
+  .title {
+    @apply font-heading font-medium text-foreground;
+  }
+
+  .description {
+    @apply text-balance text-muted-foreground text-sm;
+  }
+}

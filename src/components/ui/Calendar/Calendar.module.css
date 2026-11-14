@@ -1,0 +1,158 @@
+/*
+ * Calendar styles, one class per slot/variant. Markup lives in Calendar.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply bg-background p-3 [--cell-radius:var(--radius-md)];
+    @apply in-data-[slot=card-content]:bg-transparent in-data-[slot=popover-content]:bg-transparent [--cell-size:--spacing(8)];
+  }
+
+  /* Flip the prev/next chevrons in right-to-left layouts */
+  .root-rtl {
+    @apply rtl:**:[.rdp-button\_next>svg]:rotate-180 rtl:**:[.rdp-button\_previous>svg]:rotate-180;
+  }
+
+  .root-2 {
+    @apply w-fit;
+  }
+
+  .root-3 {
+    @apply relative flex flex-col gap-4 md:flex-row;
+  }
+
+  .root-4 {
+    @apply flex w-full flex-col gap-4;
+  }
+
+  .root-5 {
+    @apply absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1;
+  }
+
+  .root-6 {
+    @apply size-(--cell-size) p-0 select-none aria-disabled:opacity-50;
+  }
+
+  .root-7 {
+    @apply flex h-(--cell-size) w-full items-center justify-center px-(--cell-size);
+  }
+
+  .root-8 {
+    @apply flex h-(--cell-size) w-full items-center justify-center gap-1.5 text-sm font-medium;
+  }
+
+  .root-9 {
+    @apply relative rounded-(--cell-radius);
+  }
+
+  .root-10 {
+    @apply absolute inset-0 bg-popover opacity-0;
+  }
+
+  .root-11 {
+    @apply font-medium select-none;
+  }
+
+  .root-on {
+    @apply text-sm;
+  }
+
+  .root-off {
+    @apply flex items-center gap-1 rounded-(--cell-radius) text-sm [&>svg]:size-3.5 [&>svg]:text-muted-foreground;
+  }
+
+  .root-12 {
+    @apply w-full border-collapse;
+  }
+
+  .root-13 {
+    @apply flex;
+  }
+
+  .root-14 {
+    @apply flex-1 rounded-(--cell-radius) text-[0.8rem] font-normal text-muted-foreground select-none;
+  }
+
+  .root-15 {
+    @apply mt-2 flex w-full;
+  }
+
+  .root-16 {
+    @apply w-(--cell-size) select-none;
+  }
+
+  .root-17 {
+    @apply text-[0.8rem] text-muted-foreground select-none;
+  }
+
+  .root-18 {
+    @apply relative aspect-square h-full w-full rounded-(--cell-radius) p-0 text-center select-none;
+    @apply [&:last-child[data-selected=true]_button]:rounded-r-(--cell-radius);
+  }
+
+  .root-on-2 {
+    @apply [&:nth-child(2)[data-selected=true]_button]:rounded-l-(--cell-radius);
+  }
+
+  .root-off-2 {
+    @apply [&:first-child[data-selected=true]_button]:rounded-l-(--cell-radius);
+  }
+
+  .root-19 {
+    @apply relative isolate z-0 rounded-l-(--cell-radius) bg-muted after:absolute after:inset-y-0 after:right-0 after:w-4;
+    @apply after:bg-muted;
+  }
+
+  .root-20 {
+    @apply rounded-none;
+  }
+
+  .root-21 {
+    @apply relative isolate z-0 rounded-r-(--cell-radius) bg-muted after:absolute after:inset-y-0 after:left-0 after:w-4;
+    @apply after:bg-muted;
+  }
+
+  .root-22 {
+    @apply rounded-(--cell-radius) bg-muted text-foreground data-[selected=true]:rounded-none;
+  }
+
+  .root-23 {
+    @apply text-muted-foreground aria-selected:text-muted-foreground;
+  }
+
+  .root-24 {
+    @apply text-muted-foreground opacity-50;
+  }
+
+  .root-25 {
+    @apply invisible;
+  }
+
+  .root-26 {
+    @apply size-4;
+  }
+
+  .root-div {
+    @apply flex size-(--cell-size) items-center justify-center text-center;
+  }
+
+  .dayButton {
+    @apply relative isolate z-10 flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 border-0;
+    @apply leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10;
+    @apply group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-[3px];
+    @apply group-data-[focused=true]/day:ring-ring/50 data-[range-end=true]:rounded-(--cell-radius);
+    @apply data-[range-end=true]:rounded-r-(--cell-radius) data-[range-end=true]:bg-primary;
+    @apply data-[range-end=true]:text-primary-foreground data-[range-middle=true]:rounded-none;
+    @apply data-[range-middle=true]:bg-muted data-[range-middle=true]:text-foreground;
+    @apply data-[range-start=true]:rounded-(--cell-radius) data-[range-start=true]:rounded-l-(--cell-radius);
+    @apply data-[range-start=true]:bg-primary data-[range-start=true]:text-primary-foreground;
+    @apply data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground;
+    @apply dark:hover:text-foreground [&>span]:text-xs [&>span]:opacity-70;
+  }
+}

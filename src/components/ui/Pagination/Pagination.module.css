@@ -1,0 +1,43 @@
+/*
+ * Pagination styles, one class per slot/variant. Markup lives in Pagination.tsx.
+ *
+ * Rules sit in the `components` layer so that Tailwind utilities passed via
+ * `className` (in the later `utilities` layer) always override them.
+ */
+@reference "../../../app/globals.css";
+
+@layer theme, base, components, utilities;
+
+@layer components {
+  .root {
+    @apply mx-auto flex w-full justify-center;
+  }
+
+  .content {
+    @apply flex items-center gap-1;
+  }
+
+  .previous {
+    @apply pl-2!;
+  }
+
+  .previous-span {
+    @apply hidden sm:block;
+  }
+
+  .next {
+    @apply pr-2!;
+  }
+
+  .next-span {
+    @apply hidden sm:block;
+  }
+
+  .ellipsis {
+    @apply flex items-center justify-center size-9 [&_svg:not([class*='size-'])]:size-4;
+  }
+
+  .ellipsis-span {
+    @apply sr-only;
+  }
+}
